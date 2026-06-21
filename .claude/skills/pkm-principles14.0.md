@@ -148,7 +148,7 @@ Runs after morning ritual. Read **today's** date entry in `review-tracker.md` an
 **After any review completes:** mark it in the tracker with `✓ [score]%`; calculate the next review's due date and add it to the correct future date entry immediately; update note frontmatter; check System D completion threshold. **Late notice** (>5 days late but pre-staleness): "This review was [N] days late. Score may reflect additional forgetting."
 
 ### STEP 4: LEARNING OBJECTIVES CHECK — Principle 8
-Runs after the dormant scan, only if the user has not stated a direction. Check `.claude/GOALS.md`: absent or `enabled: false` → skip silently. `enabled: true` → read Current Goals; treat `note:` fields as binding; ignore Abandoned goals. If the user has a direction → skip to Part Three or Part Five. If undirected:
+Runs after the dormant scan, only if the user has not stated a direction. Check `.claude/GOALS.md`: absent or `enabled: false` → skip silently. `enabled: true` → read Current Goals (prioritize **Primary** over **Secondary**; a goal may have indented **Sub-goals** — the next unmet sub-goal of an active goal is usually the best specific focus); treat `note:` fields as binding; ignore Abandoned goals. Full goals format: `Templates/GOALS Template.md`. If the user has a direction → skip to Part Three or Part Five. If undirected:
 
 **Leads-first suggestion:** before suggesting, check the Leads sections of the 3–5 most recently created/modified notes in the active goals' domains. An open lead beats a bare goal — the goal says which domain, the lead says which step.
 
