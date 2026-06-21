@@ -1,6 +1,6 @@
-# **Maieutic** PKM — An AI-Run Personal Knowledge Management System
+# **Maieutic** PKM: An AI-Run Personal Knowledge Management System
 
-> ***Maieutic*** *(/meɪˈjuːtɪk/, may-YOO-tik)* — the Socratic art of drawing knowledge out of a learner rather than pouring it in; "midwifery of ideas." It's the method this system runs on.
+> ***Maieutic*** *(/meɪˈjuːtɪk/, may-YOO-tik)*: the Socratic art of drawing knowledge out of a learner rather than pouring it in; "midwifery of ideas." It's the method this system runs on.
 
 *A vault manager and learning partner that lives in your Obsidian vault. It teaches through narrative-Socratic dialogue, enforces retrieval practice and spaced review, and helps you build a connected, durable knowledge graph. All grounded in learning science.*
 
@@ -21,12 +21,12 @@ It is **not** a note-taking app or a chatbot. It's an accountability layer that 
 
 The behavior is built on established learning science (full syntheses in `.claude/Foundations/`, with an accessible source library in `resources/Learning Science/`):
 
-- **Retrieval practice & the testing effect** — recalling beats rereading.
-- **Spaced repetition** — intervals computed from when you *actually* complete a review.
-- **The generation effect & desirable difficulties** — you generate before the vault stores; productive struggle is the mechanism, not the cost.
-- **Metacognitive calibration** — the fluency illusion is detected with objective signals, never self-report.
-- **Narrative-Socratic teaching** — narrative builds the problem space; Socratic questions drive the generation; the two are interwoven, never segmented.
-- **Schema-building & transfer** — concepts connect into maps; an Analogy Gate pushes cross-domain transfer.
+- **Retrieval practice & the testing effect**: recalling beats rereading.
+- **Spaced repetition**: intervals computed from when you *actually* complete a review.
+- **The generation effect & desirable difficulties**: you generate before the vault stores; productive struggle is the mechanism, not the cost.
+- **Metacognitive calibration**: the fluency illusion is detected with objective signals, never self-report.
+- **Narrative-Socratic teaching**: narrative builds the problem space; Socratic questions drive the generation; the two are interwoven, never segmented.
+- **Schema-building & transfer**: concepts connect into maps; an Analogy Gate pushes cross-domain transfer.
 
 ## How it works (modes)
 
@@ -35,7 +35,7 @@ The behavior is built on established learning science (full syntheses in `.claud
 | **Learning Pipeline** | Prepare (narrative + pretest) → Attempt → Consolidate (Socratic through a character) → a natural stopping point → optional Note Creation (scope → teach-back → score → file). |
 | **Note Creation** | A standalone, user-triggered procedure: scope conversation, plain-language scoring, and a `Leads` section that points one step ahead. |
 | **Spaced Review** | Surfaces what's due, asks for a confidence estimate first, scores the teach-back, and reschedules. |
-| **Discussion Mode** | A peer-to-peer dynamic — the AI thinks out loud and holds real positions, shaped by the active intellectual **profile**. |
+| **Discussion Mode** | A peer-to-peer dynamic: the AI thinks out loud and holds real positions, shaped by the active intellectual **profile**. |
 | **Monthly Meeting** | Reflection → schema work → back-link descriptions (spaced retrieval for *connections*) → spring cleaning → profile review. |
 
 ## Map
@@ -48,7 +48,7 @@ LICENSE              # MIT
   skills/            # The behavioral spec: pkm-principles, monthly-meeting, tutorial-mode, Schema-Mapping
   Foundations/       # 5 research syntheses + an index (read per-mode)
   Transcripts/       # Exemplar teaching transcripts (read on demand) + index
-  Profiles/          # Profile-1 — the default intellectual profile for Discussion Mode
+  Profiles/          # Profile-1: the default intellectual profile for Discussion Mode
   Characters/        # Historical characters (created as you learn)
   GOALS.md           # Your learning goals (off by default)
 resources/
@@ -61,7 +61,7 @@ Templates/
 ## Quickstart
 
 1. **Clone** this repo and open the folder as a vault in [Obsidian](https://obsidian.md).
-2. **Choose your agent.** For Claude Code, just run it in the vault — it reads `CLAUDE.md` automatically. For another agent, point it at `AGENTS.md`.
+2. **Choose your agent.** For Claude Code, just run it in the vault: it reads `CLAUDE.md` automatically. For another agent, point it at `AGENTS.md`.
 3. **Start a session.** The agent confirms the date, reads the system files, and runs the morning ritual. Say *"I want to learn X"* to start the pipeline, or *"let's discuss X"* for Discussion Mode.
 4. **(Optional) Set goals.** Edit `.claude/GOALS.md` and set `enabled: true`.
 5. **(Optional) Add source libraries** to `resources/` in the format shown in `resources/Learning Science/`.
@@ -72,7 +72,7 @@ A guided in-product walkthrough is available: keep `tutorial-mode14.0.md` in `.c
 ## Customization
 
 - **Profiles** (`.claude/Profiles/`): the shipped `Profile-1` is a neutral, learning-science-grounded default. Create your own (`Profile-2`, …) and `load` / `activate` them; they shape Discussion Mode.
-- **Schema notation** (`.claude/skills/Schema-Mapping.md`): a replaceable module — swap it for your own mapping system.
+- **Schema notation** (`.claude/skills/Schema-Mapping.md`): a replaceable module: swap it for your own mapping system.
 - **Libraries** (`resources/`): free-form, but every source carries `[CLAUDE]` / `[MARKDOWN]` / `[NOTEBOOKLM]` accessibility labels.
 
 ## Notes
@@ -82,4 +82,4 @@ A guided in-product walkthrough is available: keep `tutorial-mode14.0.md` in `.c
 
 ## License
 
-MIT — see [`LICENSE`](LICENSE).
+MIT: see [`LICENSE`](LICENSE).
