@@ -1,0 +1,22 @@
+# --- Obsidian runtime / workspace state (personal, machine-specific) ---
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.obsidian/plugins/*/data.json
+.trash/
+
+# --- Smart Connections plugin embeddings (large, personal) ---
+.smart-env/
+
+# --- OS / editor junk ---
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+.vscode/
+
+# --- Notes:
+# The vault ships with empty content folders (00 - Inbox, 02 - Notes, etc.).
+# Your own notes, journal, profiles, characters, and trackers ARE meant to be
+# committed if you version your personal vault — nothing under those is ignored
+# here. Delete or extend this file to taste.
