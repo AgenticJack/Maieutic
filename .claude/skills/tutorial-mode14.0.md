@@ -925,15 +925,22 @@ shipped profile is named `Profile-1`; additional ones you create follow the
 same pattern (`Profile-2`, `Profile-3`, …) unless you rename them.
 
 The active-vs-loaded model — this is the part that surprises people:
-- **Nothing auto-loads at session startup.** Profiles are heavy context; they
-  only load on demand.
+- **The profile body doesn't auto-load at session startup.** Profiles are heavy
+  context; the bulk (beliefs, positions, character, history) only loads on demand.
+- **One exception loads at startup: the active profile's Persistent Memory.**
+  That section is the always-on slice — it's small and it's meant to shape every
+  session (see below), so Claude reads it at startup even though the rest waits.
 - **Active** and **loaded** are different things. Active is a standing
   designation — at most one profile is active at a time (or none). Loaded
-  means it's actually been pulled into the current conversation's context.
+  means the full body has been pulled into the current conversation's context.
   A profile can be active without being loaded in a given session.
-- At startup, if a profile is active, Claude asks once: "Load the active
-  profile ([name])?" It loads only if you say yes — it never loads itself
-  silently at the start of a session.
+- **Where "active" is recorded:** only in each profile's own `Active: yes|no`
+  header. There's no active-profile pointer in CLAUDE.md — Claude finds the
+  active profile by scanning the headers. (If Claude ever tells you CLAUDE.md
+  names the active profile, that's stale — it's the headers.)
+- At startup, after reading the active profile's Persistent Memory, if a profile
+  is active Claude asks once: "Load the active profile ([name])?" The full body
+  loads only if you say yes — it never loads itself silently at the start.
 - The one exception: **the active profile auto-loads silently before any
   Discussion Mode session**, whether you asked for it or it activated
   organically. You won't be asked there — it just loads, because Discussion
@@ -955,8 +962,17 @@ whether you want it live in this conversation now (load) or just set as the
 standing default for future sessions (activate).
 
 The profile also contains a Persistent Memory section — items you've asked
-Claude to remember across all sessions. To add something: just tell Claude
+Claude to remember across all sessions. This is the slice that loads at startup,
+so anything here shapes every session. To add something: just tell Claude
 to remember it. Claude will ask how you want it stored before writing anything.
+
+The shipped `Profile-1` already has one item in there, so you can see the feature
+in action: a **schema-keyword pretest cue.** It tells Claude that, during the
+pretest at the start of a learning session, it should name the topic's likely
+schema-mapping keywords — *the bare terms only, never the definitions* (defining
+them would hand you the answer and spoil the retrieval). It's there as an example
+you can keep, reword, or delete outright — open `Profile-1.md`, read the
+Persistent Memory section, and change it to whatever you want Claude to always do.
 
 Multiple profiles are useful for: different intellectual registers, domain-
 specific reasoning approaches, having a skeptical sparring partner.
@@ -990,6 +1006,21 @@ Historical figures used in the Narrative-Socratic pipeline. Claude creates
 character files automatically on first use. Slim format: epistemic state
 (what they knew/didn't know), characteristic reasoning paragraph, narrative
 threads, discussion appearances.
+
+**Schema notation (`.claude/skills/Schema-Mapping.md`):**
+This file defines the notation Claude uses when you build schema maps — the node
+types, the arrow families, the sub-relationships. It's a **swappable and deletable
+module**, and there are three ways to run it:
+- **Keep it** — use the shipped notation as-is.
+- **Swap it** — rewrite the file with your own notation system (your own arrow
+  types, your own conventions). Claude reads whatever's there and uses it.
+- **Delete it** — schema mapping still runs, just **notationless**: Claude
+  describes the relationships between ideas in plain, colloquial language instead
+  of standardized arrow types. You don't lose schema mapping by deleting the file;
+  you only lose the formal notation. (The rendered Mermaid diagram never showed
+  the arrow types anyway — they live in the discussion, not the picture.)
+So this is genuinely optional: the file is a vocabulary, not a switch. Take it,
+replace it, or remove it to taste.
 
 **Tutorial Mode:**
 You're in it now. When you're ready to leave: delete tutorial-mode14.0.md

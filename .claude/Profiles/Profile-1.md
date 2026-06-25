@@ -71,4 +71,10 @@ To what extent can a tool (AI or otherwise) support productive struggle without 
 
 ## Persistent Memory
 
-*Empty — items the user asks the AI to remember across sessions will be added here.*
+Items here are read at session startup (the always-on slice of this profile) and
+shape behavior for the whole session. This is yours to edit — change, add, or
+delete freely. (How to store an item: just the fact, or the fact plus a note on
+when to bring it up.)
+
+- **Schema-keyword pretest cue** — *when to apply: during the Phase 1 pretest of a learning session.* After the user gives their pretest, name the topic's likely schema-mapping keywords — **the bare terms only, never their definitions** (defining them would spoil retrieval). Frame it as "terms that'll come up — notice which you recognize," not as teaching. Delete this item to turn the behavior off.
+

@@ -21,13 +21,22 @@ At the start of every session, before responding to anything:
 4. Read all files in `.claude/Characters/` and restore active narrative threads
 5. Read `.note-information/review-tracker.md` — authoritative review schedule
 6. Read `.note-information/note-facts.md` — atomic fact lists for active notes
-7. Profiles do NOT auto-load. If a profile is active (see the ACTIVE PROFILE
-   field below), ask once: "Load the active profile ([name])?" — load it only
-   if the user says yes. If none is active, don't ask. The active profile also
-   auto-loads silently before any Discussion session (skill Part Seven).
-7b. Read `.claude/skills/Schema-Mapping.md` — the schema mapping notation
-    system (node types, arrow families, sub-relationships, proposition standard).
-    Use its vocabulary in all schema mapping discussions.
+7. Profiles do NOT auto-load their full body. Active state lives ONLY in each
+   profile's `Active: yes|no` header (there is no active-profile field in this
+   file) — scan the headers in `.claude/Profiles/` to find the active one (at
+   most one). From the active profile, read its `## Persistent Memory` section
+   into context now — that part IS always-on (e.g. it may carry a schema-keyword
+   pretest instruction). The heavy parts (beliefs, positions, character, history)
+   stay on disk. Then ask once: "Load the active profile ([name])?" — load the
+   full body only if the user says yes. If none is active, don't ask. The active
+   profile's full body also auto-loads silently before any Discussion session
+   (skill Part Seven).
+7b. Read `.claude/skills/Schema-Mapping.md` IF PRESENT — the schema mapping
+    notation system (node types, arrow families, sub-relationships, proposition
+    standard); use its vocabulary in all schema mapping discussions. The file is
+    optional and deletable: if it is absent, schema mapping still runs
+    notationless — describe relationships in plain/colloquial language (the
+    rendered Mermaid diagram never uses the arrow types anyway).
 7c. MEETING CHECKS (runs after date confirmation, during startup):
 
     WEEKLY MEETING CHECK:
@@ -112,10 +121,12 @@ SILENT ACTIONS: When an instruction says to do something "silently" or
 about the action itself. Do not narrate that you are doing it. Do not say
 "silently doing X." Just do it and proceed.
 
-ACTIVE PROFILE: Profile-1
-(The currently active intellectual profile — at most one, or "none". Set by
-"activate [profile]" or "load [profile]" (loading auto-activates). The named
-file must exist in `.claude/Profiles/`. Profiles do not auto-load at startup.)
+ACTIVE PROFILE — where it lives:
+There is no active-profile field in this file. The active profile is whichever
+file in `.claude/Profiles/` has `Active: yes` in its header (at most one). Set
+it with "activate [profile]" or "load [profile]" (loading auto-activates), which
+flips the headers. To find the active profile, scan the headers. Profile bodies
+do not auto-load at startup; the active profile's Persistent Memory does (step 7).
 
 IMPORTANT — resources/ access:
 Do NOT read any files inside resources/ automatically. Only access resources/
@@ -155,7 +166,7 @@ YourVault/
     Transcripts/              — Exemplary teacher transcripts
     skills/
       pkm-principles14.0.md
-      Schema-Mapping.md      — Schema mapping notation system (replaceable)
+      Schema-Mapping.md      — Schema mapping notation system (replaceable; delete → notationless)
       monthly-meeting-skill14.0.md
       tutorial-mode14.0.md       — DELETE this file to disable tutorial narration
     GOALS.md                  — Long-term learning goals and objectives
@@ -299,8 +310,11 @@ Written by Claude at end of scope agreement (before teach-back).
 
 Persistent Memory in Claude Profile:
 A profile contains a ## Persistent Memory section after Session Notes.
-Items are read when that profile loads and inform Claude's behavior for the
-rest of the session. Added only when the user asks; Claude asks how to store it.
+Unlike the rest of the profile body (which loads on demand), the active
+profile's Persistent Memory is read at session startup (step 7) and informs
+Claude's behavior for the whole session — it is the always-on slice of the
+profile. Added only when the user asks; Claude asks how to store it. The
+shipped Profile-1 carries a schema-keyword pretest instruction here.
 
 Back-link placeholder format: When note B connects to note A, Claude
 silently adds to note A's Connections section:
@@ -383,7 +397,9 @@ weighted; updated as sessions reveal patterns). Then `## Core Beliefs`,
 `## Session Notes`, `## Persistent Memory`. Belief weights range -10 to +10
 (0 = neutral; + = agreement, − = disagreement); qualitative when described to
 the user, numerical only if asked. Full format + the active/loaded loading
-rules are in skill Part Seven. Profiles do not auto-load at startup.
+rules are in skill Part Seven. Active state lives only in each profile's
+`Active:` header. Profile bodies do not auto-load at startup; the active
+profile's Persistent Memory does.
 
 **type: monthly-review**
 Lives in `01 - Journal/Monthly/`. Full reflection plus spring cleaning log.
@@ -435,6 +451,15 @@ When threshold is met, Claude says:
 
 If confirmed: update cognitive-state to completed, set completion-path and
 completed-date. Day 21 still runs as a manual review if early path triggered.
+
+On completion, Claude writes the note's `## Final Synthesis` (the single
+authoritative section: 100% of atomic facts + all vocabulary). Source it three
+ways — Claude writes it, the user writes it, or build it from Review 3; any
+user-sourced version is audited against the facts + keywords and gaps are filled
+with each addition announced. After every Review 3, also offer an optional
+Review 4 (suggest ~14 days if not yet completed, ~21 if completed) so the user
+can reach 100% by their own recall. Full procedure: skill Part Six (System D)
+and Part Four step 7b.
 
 ---
 

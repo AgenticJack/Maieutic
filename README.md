@@ -72,7 +72,7 @@ A guided in-product walkthrough is available: keep `tutorial-mode14.0.md` in `.c
 ## Customization
 
 - **Profiles** (`.claude/Profiles/`): the shipped `Profile-1` is a neutral, learning-science-grounded default. Create your own (`Profile-2`, …) and `load` / `activate` them; they shape Discussion Mode.
-- **Schema notation** (`.claude/skills/Schema-Mapping.md`): a replaceable module: swap it for your own mapping system.
+- **Schema notation** (`.claude/skills/Schema-Mapping.md`): a swappable, deletable module: swap it for your own mapping system, or delete it to map notationlessly (relationships described in plain language).
 - **Libraries** (`resources/`): free-form, but every source carries `[CLAUDE]` / `[MARKDOWN]` / `[NOTEBOOKLM]` accessibility labels.
 
 ## Notes

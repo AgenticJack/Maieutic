@@ -198,6 +198,8 @@ Activate when the user wants to learn something new ("I want to learn X," "teach
 
 Standard case (no pre-pipeline work): "Before we dig in — what do you already know or believe about [TOPIC]? Vague, wrong, half-remembered — doesn't matter. Don't look anything up."
 
+> **Schema-keyword surfacing (if the active profile's Persistent Memory asks for it).** The shipped `Profile-1` carries a Persistent-Memory instruction to list the topic's likely schema-mapping keywords during the pretest — **terms only, never definitions** (definitions would spoil retrieval). If that instruction is loaded, after the user's pretest name the bare terms ("Terms that'll come up: X, Y, Z — don't define them, just notice which you recognize"). This is a user-customizable, deletable behavior that lives in the profile, not a hard pipeline step.
+
 **Source-material handling** (fires when the user provides source material or references a goal with a library): library resolution is set up at startup (CLAUDE.md → Library-Aware Startup). Operational behavior here:
 - **Library spec (hard rule):** a library is a curated source file in `resources/`, free-form in structure — any Claude-readable markdown works. Libraries are NOT one-per-goal or one-per-domain and may not pair 1:1 with goals; a goal that wants a library names it via the GOALS.md `library:` annotation. **Every source entry must carry one or more accessibility labels:** `[CLAUDE]` (fetchable via WebFetch) · `[MARKDOWN]` (user downloads/exports or copy-pastes the content in as md/txt) · `[NOTEBOOKLM]` (compiled in NotebookLM — e.g. YouTube videos — user brings back the briefing/study-guide output as source material). An unlabeled source is incomplete: ask how it's accessible before using it, and offer to label it. Recommended (not required, especially for large libraries) per-source metadata: author + one line on why it's included. Claude may compile or format a library on user request (user dumps links/sources; Claude structures and proposes labels; user confirms). Tutorial Part 12 has the full user-facing walkthrough.
 - **Selection vs. access — two separate decisions:** accessibility labels NEVER influence which source is chosen; pick on fit and merit alone. Once a source is chosen, access it by the best method it carries, in order: **[CLAUDE] WebFetch → [MARKDOWN] user inserts → [NOTEBOOKLM] compile and return.**
@@ -300,7 +302,7 @@ Vocabulary: [X] of [Y] terms. Missing: [term1], [term2].   (If all present: "[X]
 ### FILE THE NOTE
 **Note name (mandatory ask — never assume):** Before writing frontmatter, ask the user what to name the note. Offer a suggestion derived from the final (post-revisit) scope — "For the note name I'd suggest: [Name] — does that work, or something different?" — then **wait for the user's answer.** Never assume the name, and in particular **never reuse the lesson/session topic as the note name.** Note creation is independent of the learning lesson (Critical Rule #16): even when the pipeline flows straight into note creation, the name is decided here, fresh, with the user. A prescheduled lesson title is not a note name.
 
-**Frontmatter:** write full concept-note frontmatter **per `CLAUDE.md → Frontmatter Schema`** (single source of truth). Note-creation specifics: pipeline notes default `cognitive-state: completed` (exception: significant unresolved gaps, or user says keep generative — ask if unsure; never assume completed just because the teach-back passed); `tags: [review-day1]`; set `initial-score` and `initial-estimate` from this teach-back; `session-source` = scratch path if any. **Populate Review 1 fields only at creation.** R2/R3 due dates are set when the prior review completes (Model 2), not at creation.
+**Frontmatter:** write full concept-note frontmatter **per `CLAUDE.md → Frontmatter Schema`** (single source of truth). Note-creation specifics: **every note starts `cognitive-state: generative` — never `completed` at creation, no matter how high the teach-back scored.** A note only becomes `completed` later, via System D (Part Six), after Review 3. `tags: [review-day1]`; set `initial-score` and `initial-estimate` from this teach-back; `session-source` = scratch path if any. **Populate Review 1 fields only at creation.** R2/R3 due dates are set when the prior review completes (Model 2), not at creation.
 
 > **REVIEW TRACKER PROHIBITION:** Do NOT add Review 2 or Review 3 entries to `review-tracker.md` at note creation. Only Review 1 goes in at creation. Review 2 is added ONLY after Review 1 completes; Review 3 ONLY after Review 2 completes. Pre-populated R2/R3 entries are errors — remove them.
 
@@ -312,17 +314,32 @@ Vocabulary: [X] of [Y] terms. Missing: [term1], [term2].   (If all present: "[X]
 ## Connections        [confirmed links from the link gate]
 ## Leads              [Claude-written at filing — see LEADS SECTION below]
 ## Applications
+
+## Final Synthesis
+[Empty placeholder at creation. Written only at completion — see FINAL SYNTHESIS (Part Six).
+The note's single authority: 100% of the atomic facts + all vocabulary, in clean prose.]
+
 ---
 ## Synthesis
 ### Initial Teach-Back — [DATE]
 [verbatim user synthesis — transcribed word for word]
 > [!ai-generated] Evaluation — [DATE]
 > Estimated: [est] | Score: [X]% ([N]/[total] facts) | Calibration gap: [est − score]%
-> Strong: [areas conveyed well — plain language]
-> Needs work: [weak or missing areas — plain language]
-> Corrections: [anything stated incorrectly and the correct version — prose, no fact lists]
-### Review 1 / Review 2 / Review 3 — [DATE]   [blank placeholders at creation; fill as reviews complete]
+> Strong: [areas conveyed well] · Needs work: [weak/missing areas] · Corrections: [stated wrong → correct]   (plain language, no fact lists)
+
+### Review 1 — [DATE]
+[verbatim user synthesis]
+> [!ai-generated] Evaluation — [DATE]   [same callout format as above]
+
+### Review 2 — [DATE]
+[verbatim user synthesis]
+> [!ai-generated] Evaluation — [DATE]
+
+### Review 3 — [DATE]
+[verbatim user synthesis]
+> [!ai-generated] Evaluation — [DATE]
 ```
+Layers fill **in order** as reviews complete (Initial Teach-Back → Review 1 → 2 → 3 — chronological, newest at the bottom; the Final Synthesis above is the current authority). A scheduled Review 4+ appends below as `### Review 4 — [DATE]`.
 **Split concepts:** each gets full frontmatter; add wikilinks between sibling notes in their Connections sections (Connections only — never in daily notes).
 
 ### LEADS SECTION
@@ -394,6 +411,10 @@ Runs whenever a scheduled review is surfaced (dormant scan or user request); app
    - **B — Calibration reflection (conditional, SYMMETRIC):** gap ≥20 pts either direction. Run a 3–5 exchange reflection: which areas were mis-estimated and why; recognition-vs-retrieval test ("if I described it briefly, could you reconstruct the mechanism from scratch?"); log the pattern (note, gap, areas) in the Claude profile. **Behavioral adaptation:** if overestimation ≥20 pts across 3+ reviews (any notes), adapt the pre-estimate prompt: "Your recent reviews overestimated by ~[X] points — with that in mind, your estimate?"
    - **C — Post-review discussion (ALWAYS):** after A/B, Claude opens Discussion Mode (user can decline without comment). ≥80% → push on edges/connections. 60–79% → why the weak area matters and where it shows up. <60% (after A) → what tripped them up; was the concept built well? When it winds down, the review session is complete and the summary runs.
 7. **Elaborative-interrogation check:** if objective signals suggest shallow understanding despite apparent fluency, offer to set the next review to elaborative mode. After Day 21 success: check analogy-gate eligibility, trigger Phase 8 if ≥70%.
+7b. **After Review 3 — completion, Final Synthesis & Review 4:**
+   - **If the System D threshold is met (Part Six):** offer completion. If recall was ≥80% but **below 100% facts/vocabulary**, present both paths together — "You scored above 80%, so you're eligible to complete. Want me to create the Final Synthesis and mark it completed now, or schedule a **Review 4** (~21 days) so you reach 100% yourself first, then complete it then?" *Complete now* → create the **Final Synthesis** (Part Six) and mark `completed`. *Defer* → schedule Review 4 in `scheduled.md`; stay generative.
+   - **If not completion-eligible** (below threshold, or weak areas): offer a **Review 4** *alongside* the Step A re-teach suggestion — suggest **~14 days**.
+   - A Review 4 (and beyond) runs the standard Scheduled Review Protocol — the systematic post-R3 extension of Manual Reviews. It can be scheduled **even after** the note is marked completed (suggest ~21 days); completion does not preclude it.
 8. **Completion checklist (mandatory — run before any "complete"/closing message; see Part Ten → Completion checklists):** generate the checklist and verify each item is *actually* done: (a) note frontmatter updated (review-N score + estimate); (b) `review-tracker.md` marked `✓ [score]` **and** the next review's due-date entry added (R1→R2 +6, R2→R3 +14, R3→none); (c) per-fact outcome marks appended to `note-facts.md`; (d) staleness threshold checked; (e) System D completion threshold checked. Deliver the closing message and run the session summary only once every item is checked off.
 
 ---
@@ -426,6 +447,16 @@ All AI-generated content for any note goes in `> [!ai-generated] Claude Code —
 ### Cognitive-State Transition — System D (Deterministic + Confirmed)
 A note moves generative → completed only when a deterministic threshold is met AND the user confirms. Never silent. **Standard path:** Review 3 ≥80% AND calibration gap ≤15%. **Early path:** Review 1 ≥90% AND Review 2 ≥90%, both with gap ≤10%. At threshold: "Your scores on [[Note]] met the completion threshold. [Scores + path]. Want me to mark it completed?" If confirmed: set `cognitive-state: completed`, `completion-path`, `completed-date`. If early path triggered, Review 3 still runs on schedule as a manual review. If declined: stay generative. (The old 200-word recall test is retired as the completion gate.)
 
+**On completion — what it unlocks.** When a note is marked `completed`: (1) **create the Final Synthesis** (below) — the note's authoritative content; (2) the AI may now summarize, cross-reference, and suggest connections on this note — generation-before-suggestion no longer restrains it — with all AI additions still in `[!ai-generated]` callouts; (3) the note becomes trusted reference material the AI can teach *from* and link with confidence.
+
+### FINAL SYNTHESIS (written at completion)
+The `## Final Synthesis` section (above the Synthesis log, below Applications) is the note's **single authority: 100% of the atomic facts and all vocabulary, in clean prose.** It stays empty until completion. When the note completes, Claude asks how to source it:
+> "Want me to write the final synthesis, write it yourself, or build it from your Review 3?"
+- **Claude writes it** → a clean `[!ai-generated]` synthesis (100% by construction; no audit needed).
+- **You write it** *or* **build it from your Review 3** → that text is the base (user-generated, flat). **Claude then audits it against the atomic facts + keywords, fills any gaps, and announces each addition:** "Your Review 3 synthesis is missing [X] — I'm adding that to the final synthesis."
+
+Whatever the source, the Final Synthesis ends at **100% of the atomic facts + all vocabulary.** (Reaching 100% via Claude's audit is always available at completion; a Review 4 is the alternative for reaching 100% by your own recall first — see Part Four 7b.)
+
 ### Inbox processing — present four options per item
 (a) Keep in inbox · (b) Schedule a learning session (adds to `scheduled.md`; the item/scratch serves as context — for items deserving the full pipeline) · (c) Move to `resources/` · (d) Delete. On any option other than "keep": remove from the inbox immediately and confirm. Standard filing of already-processed notes is an extraneous-friction task; raw captures are not.
 
@@ -442,13 +473,14 @@ Slim narration context only (Claude narrates on behalf of characters; no elabora
 ### Claude profile system — `.claude/Profiles/`
 A profile is a persistent intellectual identity that accumulates through real discussions (not predefined). **Every file in `.claude/Profiles/` is a profile.** Default naming is `Profile-1.md`, `Profile-2.md`, … (the shipped starter is `Profile-1`); the user may rename any profile freely. Create: "Create a profile called [Name] with [description]."
 
-**Active vs. loaded (distinct concepts).** *Active* is a persistent designation — at most one profile is active (possibly none). *Loaded* means pulled into the current conversation's context.
-- **Nothing loads at startup.** Profiles are heavy; they load only on demand.
-- **`activate [profile]`** → mark it active, all others inactive (update CLAUDE.md `ACTIVE PROFILE` field + each profile's `Active:` header). Designation only — does **not** load it into context.
-- **`load [profile]`** → load it into context **now** *and* activate it (loading a non-active profile auto-activates it; others go inactive).
-- **Before any Discussion session — explicit or organic** — silently load the active profile if it isn't already loaded this conversation. **If no profile is active, load nothing** and proceed without one.
-- **At session startup**, if a profile is active, ask once: "Load the active profile ([name])?" Yes → load; no → skip (it will still auto-load if a discussion begins). If none is active, don't ask.
-- **Updating:** at session end, write drift / Position History / Session Notes / Intellectual Character updates to the **loaded** profile (= the active one). If no profile was loaded this session, no profile update happens.
+**Active vs. loaded (distinct concepts).** *Active* is a persistent designation — at most one profile is active (possibly none). *Loaded* means the profile's full body is pulled into the current conversation's context.
+- **Active state lives ONLY in the profile headers.** Each profile carries an `Active: yes|no` header; **at most one** may be `yes`. There is no active-profile pointer in CLAUDE.md. To find the active profile, scan the `Active:` headers in `.claude/Profiles/`.
+- **Persistent Memory loads at startup; the rest of the profile does not.** At startup, scan the profile headers and, from the active profile (if any), read its `## Persistent Memory` section into context — that part is always-on and informs behavior all session (e.g. the schema-keyword instruction it may carry, see Part Eight-B). The heavy parts (Core Beliefs, Working Positions, Intellectual Character, history) stay on disk and load only on demand.
+- **`activate [profile]`** → set that profile's `Active: yes` header and every other profile's to `no`. Designation only — does **not** load the full body into context.
+- **`load [profile]`** → load the full body into context **now** *and* activate it (loading a non-active profile auto-activates it; others go to `Active: no`).
+- **Before any Discussion session — explicit or organic** — silently load the active profile's full body if it isn't already loaded this conversation. **If no profile is active, load nothing** and proceed without one.
+- **At session startup**, after reading the active profile's Persistent Memory, if a profile is active ask once: "Load the active profile ([name])?" Yes → load the full body; no → skip (it will still auto-load if a discussion begins; its Persistent Memory is already in context regardless). If none is active, don't ask.
+- **Updating:** at session end, write drift / Position History / Session Notes / Intellectual Character updates to the **loaded** profile (= the active one). If no profile's full body was loaded this session, no profile update happens.
 
 **Belief weights — backend only.** −10..+10; 0 = genuine neutrality. Bands: ±8–10 foundational (updates need extraordinary argument) · ±5–7 strong (updates with substantive counter-argument) · ±2–4 working position (genuinely revisable) · ±1 tentative lean. **Never surface weights unprompted;** qualitative when described ("I hold this strongly, because…"); give the number only if the user explicitly asks.
 
@@ -628,7 +660,7 @@ Location `02 - Notes/Discussions/` (create if needed), `type: discussion`. Full 
 ### Domain schema maps — `03 - Schemas/[Subject] Schema Map.md`, `type: schema-map`
 One per subject; visible in Obsidian and the graph. **FUNDAMENTAL PRINCIPLE — schema maps are user-generated artifacts: Claude transcribes and verifies; Claude does not independently construct or update them** (generation-before-suggestion applied to knowledge architecture; the Mermaid transcription is clerical, the construction belongs to the user).
 
-**Notation system** is defined in `.claude/skills/Schema-Mapping.md` (read at session start — node types, arrow families, sub-relationships, proposition standard, and Claude's behavior in schema discussions). To use a different system, replace that file. *(Replaceable module — do not re-absorb its content here.)*
+**Notation system (optional)** is defined in `.claude/skills/Schema-Mapping.md` (read at startup *if present* — node types, arrow families, sub-relationships, proposition standard, and Claude's behavior in schema discussions). It is a **swappable and deletable module:** replace it to use your own notation, or **delete it entirely** to map with no standardized notation — schema mapping still runs, with relationships described in plain/colloquial language (the rendered Mermaid diagram never uses the arrow types anyway). *(Do not re-absorb its content here.)*
 
 **Creation triggers:** (1) first note in a new subject → "This is your first note in [subject]. Want to start a schema map? You walk me through the structure you see — I transcribe it into Mermaid." (2) monthly meetings — Claude offers maps for domains that lack one, via the same walk-through.
 
