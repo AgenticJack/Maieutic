@@ -41,7 +41,7 @@ review-1: uncompleted
 ## Body
 
 ```
-> [!description] What this note covers
+> [!quote] What this note covers
 > [1–2 sentences: core claim/mechanism — a scope identifier, not a summary]
 > [Optional: what this note explicitly does NOT cover]
 

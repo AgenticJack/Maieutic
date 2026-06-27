@@ -16,6 +16,14 @@ between. If this file is missing or behind, the AI can fetch the canonical copy:
 
 ## 14.2
 
+- **[migration] Fully native callouts (custom types retired).** The two remaining
+  custom callout types are gone, so every callout renders with a real color/icon
+  for anyone who clones the vault — no CSS snippet needed. `[!description]` →
+  `[!quote]` (gray); `[!ai-generated]` → `[!example]` (purple), which is now the
+  single default for all general AI content (leads, applications, the
+  discussion-note AI block, anything unspecified). *Existing notes:* re-type any
+  `[!description]` callout to `[!quote]`, and any `[!ai-generated]` callout to
+  `[!example]`.
 - **[migration] Discussion-note frontmatter is now YAML-safe.** The old template
   put prose into inline `[...]` list fields (`positions-held`, `open-questions`,
   `resolution`, plus unquoted wikilinks), which breaks YAML — a stray `"`, `:`,

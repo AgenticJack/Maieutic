@@ -385,7 +385,7 @@ The critical transition: AI-generated insight → your knowledge.
 
 1. **Close the Claude window.** Don't look at it.
 2. **Open `#completed` note**, write: core concept (1 sentence, your words); mechanism (why it works, your words); 2–3 connecting links to existing notes (you choose); one open question; one application to attempt this week.
-3. **Now open the Claude log.** Check for gaps. Anything added from the log gets a `[!ai-generated]` callout.
+3. **Now open the Claude log.** Check for gaps. Anything added from the log gets a `[!example]` callout.
 4. **Tag for spaced review:** `#review-day1` + creation date.
 
 **Discipline:** what enters the vault is YOUR reconstruction, not the AI's explanation — the generation effect in practice.
@@ -420,7 +420,7 @@ Mechanism: ICAP (Chi & Wylie, 2014, §3.3); AutoTutor (Nye et al., 2014, §3.1).
 
 *Nothing enters a `#completed` note that was not first generated from memory.*
 
-AI logs/source excerpts/external explanations may be consulted post-draft only to check gaps, not as the draft itself. Material added post-draft from external sources → `[!ai-generated]` or `[!source-copied]` callout.
+AI logs/source excerpts/external explanations may be consulted post-draft only to check gaps, not as the draft itself. Material added post-draft from external sources → `[!example]` or `[!source-copied]` callout.
 
 Mechanism: Generation effect + self-explanation effect (Chi et al., 1994; Slamecka & Graf, 1978, §1.3/3.5).
 

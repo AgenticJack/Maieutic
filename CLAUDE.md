@@ -317,10 +317,10 @@ Format in note-facts.md: [Keyword] [weight:1] [term]
 Missing keywords are always named in vocabulary feedback.
 
 Note description callout format:
-Each concept note contains a [!description] callout placed immediately after
+Each concept note contains a [!quote] callout placed immediately after
 the closing --- of the frontmatter, before the Connections section:
 
-  > [!description] What this note covers
+  > [!quote] What this note covers
   > [1-2 sentences: core claim/mechanism — scope identifier, not content summary]
   > [Optional: what this note explicitly does NOT cover]
 
@@ -536,7 +536,11 @@ Part Six → Callout System. Quick reference:
 | Final Synthesis | `[!success]` (green, reserved) |
 | Final-synthesis audit additions | `[!todo]` |
 | Leads / AI-written Applications | `[!example]` (purple) |
-| Fallback AI content | `[!ai-generated]` |
+| Note description | `[!quote]` (gray) |
+| Default — general AI content (incl. discussion-note AI block) | `[!example]` (purple) |
+
+All native Obsidian types — they render with color/icon for anyone who clones the
+vault, no CSS needed. The old custom `[!ai-generated]`/`[!description]` are retired.
 
 Never flat into a note body. Exception: verbatim user synthesis goes directly
 into the Synthesis section, flat — it is user-generated. Only the evaluation

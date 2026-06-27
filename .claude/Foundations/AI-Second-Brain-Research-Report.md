@@ -161,7 +161,7 @@ Implementation: maintain a personal tag #generative vs. #completed; only invoke 
 **P7 — Provenance Preservation** `[THEORETICAL]`
 Rule: AI-generated content MUST be visually/structurally distinguished from user-authored content so the vault remains a trustworthy extended-mind artefact.
 Warrant: Clark & Chalmers (1998) coupling conditions require automatic endorsement; unattributed AI content fails the endorsement condition.
-Implementation: all AI-generated blocks in a `> [!ai-generated]` callout; never merge into the note without rewriting in the user's own words.
+Implementation: all AI-generated blocks in a `> [!example]` callout; never merge into the note without rewriting in the user's own words.
 
 **P8 — Friction Budgets, Not Friction Maximisation** `[THEORETICAL]`
 Rule: remove *extraneous* friction (formatting, search, file management); preserve *germane* friction (recall, comparison, generation).

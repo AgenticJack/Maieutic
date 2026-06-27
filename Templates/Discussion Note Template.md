@@ -35,7 +35,7 @@ session-source: "path/to/scratch.md"
 ## Resolution                [what was settled, if anything — the prose the old resolution field tried to hold]
 ## Next Moves
 
-> [!ai-generated] AI — [DATE]
+> [!example] AI — [DATE]
 > [Honest assessment of where the strongest arguments lie — marked as AI perspective.]
 ```
 

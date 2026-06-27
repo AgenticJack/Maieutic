@@ -241,7 +241,7 @@ resolution: [if any — what was settled and why]
 cognitive-state: generative
 ```
 
-**Body sections:** The Question · Positions and Reasoning (not a summary — what was taken, why, what it had to navigate) · Considerations Map (strongest form, each side) · What Shifted (positions updated + what changed them) · What Remains Open (honest list) · Next Moves (what would resolve open questions) · `[!ai-generated]` block — AI's summary, most-compelling considerations, honest assessment of where the strongest arguments lie, marked as AI perspective not user synthesis.
+**Body sections:** The Question · Positions and Reasoning (not a summary — what was taken, why, what it had to navigate) · Considerations Map (strongest form, each side) · What Shifted (positions updated + what changed them) · What Remains Open (honest list) · Next Moves (what would resolve open questions) · `[!example]` block — AI's summary, most-compelling considerations, honest assessment of where the strongest arguments lie, marked as AI perspective not user synthesis.
 
 **Differences from learning-pipeline notes:** no atomic fact list, no three-retrieval schedule, no teach-back/scoring; Open Questions section is central, not incidental; note may remain generative indefinitely (not a failure state). A tentative position the user wants to revisit can get a manual entry in `scheduled.md` — this is a follow-up conversation entry point, not a retrieval review.
 

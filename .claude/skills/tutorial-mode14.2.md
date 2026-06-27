@@ -877,8 +877,14 @@ The callout colors are a code — you can read a note's health at a glance:
   the note's apex, written only at completion. Under it, a dark-blue `[!todo]`
   "Audit additions" callout lists anything Claude added to reach 100%.
 - A cyan `[!abstract]` "Re-consolidation note" marks a gap you closed in a
-  targeted re-teach. Purple `[!example]` callouts hold Leads and AI-written
-  Applications (purple, to echo the color of wikilinks).
+  targeted re-teach.
+- **Purple `[!example]` is the general AI voice** — Leads, AI-written Applications,
+  and the AI assessment on discussion notes (purple, to echo the color of
+  wikilinks). It's the default for any AI content without a more specific color.
+- A gray `[!quote]` callout at the top of a note is its **description** — the
+  "what this note covers" orientation blurb.
+- Every one of these is a built-in Obsidian callout, so the colors and icons just
+  work the moment you open the vault — nothing to install.
 - The rule behind all of it: **a callout always means Claude wrote it.** Your own
   words are never in a callout. So if it's in a colored box, the AI authored it.
 
