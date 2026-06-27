@@ -27,9 +27,10 @@ between. If this file is missing or behind, the AI can fetch the canonical copy:
   AI wrote it). *Existing completed notes:* convert the Final Synthesis to this
   layout.
 - **[migration] Leads / Applications callouts.** AI-written `## Leads` and
-  `## Applications` now use `[!abstract]` (cyan). *Existing notes:* re-type.
+  `## Applications` now use `[!example]` (purple, matching wikilinks).
+  *Existing notes:* re-type.
 - **[migration] Re-consolidation entries.** Collapse the old header-paragraph +
-  callout-paragraph into a single `> [!tip] Re-consolidation note` paragraph.
+  callout-paragraph into a single `> [!abstract] Re-consolidation note` paragraph.
 - **[migration] Manual-review titling.** Reviews after Review 3 are titled
   `### Review N (Manual Review) — [DATE]`, appended under `## Synthesis` in strict
   temporal order. *Existing notes:* retitle any post-R3 reviews.

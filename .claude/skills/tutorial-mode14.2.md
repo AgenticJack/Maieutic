@@ -876,8 +876,9 @@ The callout colors are a code — you can read a note's health at a glance:
 - **Green `[!success]` is reserved for the Final Synthesis** — the one green block,
   the note's apex, written only at completion. Under it, a dark-blue `[!todo]`
   "Audit additions" callout lists anything Claude added to reach 100%.
-- A teal `[!tip]` "Re-consolidation note" marks a gap you closed in a targeted
-  re-teach. Cyan `[!abstract]` callouts hold Leads and AI-written Applications.
+- A cyan `[!abstract]` "Re-consolidation note" marks a gap you closed in a
+  targeted re-teach. Purple `[!example]` callouts hold Leads and AI-written
+  Applications (purple, to echo the color of wikilinks).
 - The rule behind all of it: **a callout always means Claude wrote it.** Your own
   words are never in a callout. So if it's in a colored box, the AI authored it.
 

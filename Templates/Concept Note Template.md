@@ -50,11 +50,11 @@ review-1: uncompleted
 ## Connections        [confirmed links from the link gate — [[wikilinks]] only here]
 
 ## Leads
-> [!abstract] Leads — [DATE]
+> [!example] Leads — [DATE]
 > [AI-written at filing: Continuation / Boundary / Open-question leads; plain prose, no forward wikilinks]
 
 ## Applications
-> [!abstract] Applications — [DATE]
+> [!example] Applications — [DATE]
 > [only when Claude writes them; user-written applications stay flat, no callout]
 
 ## Final Synthesis
@@ -93,7 +93,7 @@ Built from: [Claude / user / Review 3]. Audited to 100% of atomic facts + all vo
 [verbatim user synthesis]
 > [!CALLOUT] Evaluation — [DATE]
 
-> [!tip] Re-consolidation note — [DATE]
+> [!abstract] Re-consolidation note — [DATE]
 > [a Step A re-teach that closed a recurring gap: one paragraph covering the gap,
 > how the user closed it, and the protocol note (e.g. the recorded score stands).
 > One callout only — no duplicate paragraph above it.]

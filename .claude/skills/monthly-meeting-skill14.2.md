@@ -491,7 +491,8 @@ the new form, apply on confirmation. Examples:
 - *14.2 — score-banded evaluation callouts:* for each existing note, re-type each
   `> [!ai-generated] Evaluation` callout to its score band using the score already
   recorded in that callout/in `review-tracker.md` — `=100% [!todo] · 80–99%
-  [!tip] · 60–79% [!warning] · <60% [!failure]`. Leads/Applications → `[!abstract]`.
+  [!tip] · 60–79% [!warning] · <60% [!failure]`. Leads/Applications → `[!example]`;
+  re-consolidation → `[!abstract]`.
 - *14.2 — Final-Synthesis format:* completed notes get the `[!success]` /
   `[!todo]` layout; re-consolidation paragraphs collapse into a single `[!tip]`.
 

@@ -315,11 +315,11 @@ Vocabulary: [X] of [Y] terms. Missing: [term1], [term2].   (If all present: "[X]
 ## Connections        [confirmed links from the link gate]
 
 ## Leads
-> [!abstract] Leads — [DATE]
+> [!example] Leads — [DATE]
 > [Claude-written at filing — see LEADS SECTION below]
 
 ## Applications
-> [!abstract] Applications — [DATE]
+> [!example] Applications — [DATE]
 > [only when Claude writes them; user-written applications stay flat, no callout]
 
 ## Final Synthesis
@@ -362,13 +362,13 @@ Built from: [Claude / user / Review 3]. Audited to 100% of atomic facts + all vo
 
 **Re-consolidation entries** (a targeted Step A re-teach that closes a recurring gap) are appended under `## Synthesis` in temporal order as a **single callout** — no separate header+paragraph (one consolidated paragraph inside the callout):
 ```
-> [!tip] Re-consolidation note — [DATE]
+> [!abstract] Re-consolidation note — [DATE]
 > [one paragraph: the gap that was closed, how the user closed it, and the protocol note — e.g. the recorded review score stands. Do not also write a duplicate paragraph above the callout.]
 ```
 **Split concepts:** each gets full frontmatter; add wikilinks between sibling notes in their Connections sections (Connections only — never in daily notes).
 
 ### LEADS SECTION
-`## Leads` (replaces the old Open Questions section) holds the pathways *out* of this note. **Claude-written at filing, as extraneous friction — no gate.** The user doesn't yet know what they don't know; leads are navigational metadata, not a user cognitive artifact. Per Critical Rule #4, Claude's leads go inside an `[!abstract]` callout (Callout System, Part Six); leads the user adds themselves are flat (user-generated). Write them as plain prose — **no forward wikilinks to not-yet-existing notes** (a lead is only a guess at a future note's name, and names are decided fresh at creation per the note-name rule; a real link forms only when the lead is actually pursued).
+`## Leads` (replaces the old Open Questions section) holds the pathways *out* of this note. **Claude-written at filing, as extraneous friction — no gate.** The user doesn't yet know what they don't know; leads are navigational metadata, not a user cognitive artifact. Per Critical Rule #4, Claude's leads go inside an `[!example]` callout (Callout System, Part Six); leads the user adds themselves are flat (user-generated). Write them as plain prose — **no forward wikilinks to not-yet-existing notes** (a lead is only a guess at a future note's name, and names are decided fresh at creation per the note-name rule; a real link forms only when the lead is actually pursued).
 
 **Write every lead that genuinely exists — do not force one of each kind, and do not cap the count.** Some notes yield several leads of one kind and none of another; a note may have no open questions, or three divergent continuations. Capture what is actually there, grouped under these three kinds (omit a kind entirely if it is empty — do not invent one to fill a slot):
 - **Continuation** *(horizontal — forward):* where the conversation was heading when it stopped. Had the session been forced to continue, what would it have covered next? Often the strongest lead; there can be more than one path.
@@ -480,11 +480,11 @@ Syntax: `> [!type] Title — [DATE]` then `> ` body lines. Use these types:
 | Review evaluation, **80–99%** | `[!tip]` | teal-green | " |
 | Review evaluation, **60–79%** | `[!warning]` | orange | " |
 | Review evaluation, **<60%** | `[!failure]` | red | " |
-| Re-consolidation note | `[!tip]` | teal-green | Synthesis log (gap closed) |
+| Re-consolidation note | `[!abstract]` | cyan | Synthesis log (gap closed) |
 | **Final Synthesis** | `[!success]` | green (reserved) | `## Final Synthesis` |
 | Final-synthesis audit additions | `[!todo]` | dark blue | inside `## Final Synthesis` |
-| Leads | `[!abstract]` | cyan | `## Leads` |
-| Applications (only when Claude writes them) | `[!abstract]` | cyan | `## Applications` |
+| Leads | `[!example]` | purple | `## Leads` |
+| Applications (only when Claude writes them) | `[!example]` | purple | `## Applications` |
 | Note description | `[!description]` | (custom) | after frontmatter |
 
 `[!success]` (green) is **reserved for the Final Synthesis** so it is the single green block and the visual apex of the note — a regular review that scores exactly 100% uses `[!todo]` (dark blue), never `[!success]`. Pick the evaluation type by the recorded review score. `[!ai-generated]` is the legacy fallback for any AI content that doesn't fit a row above.

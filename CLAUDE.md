@@ -513,10 +513,10 @@ Part Six → Callout System. Quick reference:
 | Role | Callout |
 |---|---|
 | Review evaluation | by score: `=100% [!todo]` · `80–99% [!tip]` · `60–79% [!warning]` · `<60% [!failure]` |
-| Re-consolidation note | `[!tip]` |
+| Re-consolidation note | `[!abstract]` |
 | Final Synthesis | `[!success]` (green, reserved) |
 | Final-synthesis audit additions | `[!todo]` |
-| Leads / AI-written Applications | `[!abstract]` |
+| Leads / AI-written Applications | `[!example]` (purple) |
 | Fallback AI content | `[!ai-generated]` |
 
 Never flat into a note body. Exception: verbatim user synthesis goes directly
