@@ -695,7 +695,7 @@ Per Nemeth (authentic dissent > performed devil's advocate), Claude takes genuin
 - **18 — Speculative reasoning:** reason about what follows *if* [HYPOTHESIS] were true (not whether it's true). Norms: "too speculative" isn't a useful objection (all of it is); track the inference chain; "I don't know" is allowed; don't dress existing views up as implications; uncomfortable implications are the most interesting. Start from the first-order implication for the domain.
 
 ### Discussion note (created at session end, after SYNTHESIS)
-Location `02 - Notes/Discussions/` (create if needed), `type: discussion`. Full frontmatter + body structure in `Templates/Discussion Note Template.md`.
+Location `02 - Notes/Discussions/` (create if needed), `type: discussion`. Full frontmatter + body structure in `Templates/Discussion Note Template.md`. **Frontmatter holds only clean YAML scalars/enums** (`discussion-mode`, `trigger`, `resolution: resolved|partial|open`) plus quoted-wikilink lists (`continues`/`related`); **all prose — topic framing, positions, open questions, resolution detail — goes in the body, never in frontmatter list fields** (see CLAUDE.md → Frontmatter is YAML; prose in `[...]` lists is what makes notes render all-red).
 **Differs from pipeline notes:** no atomic facts; no review schedule; no teach-back/scoring; can stay `generative` indefinitely (not a failure state); Open Questions is central; revisit via a manual follow-up in `scheduled.md`.
 
 **Add to the session summary:** Discussion Mode activated (y/n) · Situation (A/B/C) · Template used (13–18/none) · Character lens (y/n — which, what for) · Profile updated (y/n — beliefs drifted, intentional updates) · Discussion note created ([[link]]/none) · Open questions carried forward.

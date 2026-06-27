@@ -152,6 +152,25 @@ Do not treat it as code. Do not run linters or formatters on it.
 - Tags (#tag) in frontmatter and inline are valid. Do not remove.
 - Callout blocks (> [!type]) are valid Obsidian syntax.
 
+FRONTMATTER IS YAML — WRITE IT SAFELY (this prevents the all-red property
+errors in Obsidian):
+- **Never put free prose in frontmatter.** Field values are short scalars/enums
+  (e.g. `resolution: partial`) or lists. Anything that reads like a sentence —
+  with colons, quotes, parentheses, `#`, semicolons, or em-dashes — goes in the
+  note BODY, not a frontmatter field.
+- **Never use inline `[ ... ]` lists for prose.** `positions-held: [a: b, "x"
+  is y]` is invalid YAML — the `"` opens a quoted scalar, the `:` reads as a
+  map, the brackets nest. One stray character turns the whole block red.
+- **Always quote wikilinks in frontmatter** and use block style:
+  ```
+  related:
+    - "[[Note A]]"
+    - "[[Note B]]"
+  ```
+  Bare `related: [[Note]]` is a nested flow sequence and errors.
+- If a scalar genuinely must contain `:`, `#`, a leading `[`/`{`/`"`/`*`/`&`,
+  wrap the entire value in double quotes — but prefer moving it to the body.
+
 ---
 
 ## Vault Structure

@@ -16,6 +16,15 @@ between. If this file is missing or behind, the AI can fetch the canonical copy:
 
 ## 14.2
 
+- **[migration] Discussion-note frontmatter is now YAML-safe.** The old template
+  put prose into inline `[...]` list fields (`positions-held`, `open-questions`,
+  `resolution`, plus unquoted wikilinks), which breaks YAML — a stray `"`, `:`,
+  `(`, or `[[` makes Obsidian render the whole property block red (~⅓ of notes).
+  Frontmatter now holds only clean scalars/enums (`resolution: resolved|partial|
+  open`) and quoted-wikilink lists; the prose moved to body sections (`## The
+  Question`, `## Positions and Reasoning`, `## What Remains Open`, `## Resolution`).
+  *Existing discussion notes:* move prose out of frontmatter into the body and
+  quote any wikilinks, so the properties parse.
 - **[migration] Score-banded evaluation callouts.** Review evaluations no longer
   use `[!ai-generated]`. The callout type now encodes the recorded score:
   `=100% [!todo]` (blue) · `80–99% [!tip]` (teal) · `60–79% [!warning]` (orange) ·
