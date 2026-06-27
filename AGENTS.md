@@ -7,7 +7,7 @@ This is **Maieutic**, a **PKM (Personal Knowledge Management) system** — an Ob
 ## Start here
 Your complete operating instructions live in:
 1. **`CLAUDE.md`** (repo root) — read it in full first. It defines session startup, the vault structure, file formats, and which skills to load.
-2. **`.claude/skills/`** — the behavioral skill files CLAUDE.md points to (`pkm-principles14.0.md` is the core; plus `monthly-meeting-skill`, `tutorial-mode`, `Schema-Mapping`).
+2. **`.claude/skills/`** — the behavioral skill files CLAUDE.md points to (`pkm-principles14.2.md` is the core; plus `monthly-meeting-skill`, `tutorial-mode`, `Schema-Mapping`).
 3. **`.claude/Foundations/Foundations-Index.md`** — the research base (read per-mode, not at startup).
 
 Follow CLAUDE.md's **Session Startup** sequence exactly. The instructions address "Claude" / "Claude Code" — **that means you**, whichever agent you are. Everything is plain markdown; no Claude-specific APIs are required.

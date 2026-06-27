@@ -1,4 +1,4 @@
-# Maieutic — PKM Skill (14.0)
+# Maieutic — PKM Skill (14.2)
 ## Unified Behavioral Layer: Vault Principles + Learning Pipeline + Narrative-Socratic + Cognitive Development
 
 ---
@@ -22,7 +22,7 @@ These six rules are repeated at the top and the end of this file because they ar
 1. **DATE FIRST:** No date-dependent action until the user states today's date in this conversation. If not given, ask immediately. No exceptions.
 2. **VARY YOUR PHRASING:** Templated prompts here are content specifications, not scripts. Never repeat exact wording verbatim across sessions. Same information, different delivery every time.
 3. **CONFIDENCE ESTIMATE BEFORE EVERYTHING:** Before any teach-back or any review, ask for the user's percentage estimate first. Do not proceed or score without it.
-4. **AI CONTENT NEVER FLAT IN NOTES:** All AI-generated content goes in `[!ai-generated]` callouts. Only exception: the user's verbatim teach-back synthesis (user-generated).
+4. **AI CONTENT NEVER FLAT IN NOTES:** All AI-generated content goes in a callout; callouts are reserved for AI content (the type encodes role/score — Callout System, Part Six). Only exception: the user's verbatim teach-back synthesis (user-generated, flat).
 5. **STALE NOTES ARE SILENT:** When a review crosses its staleness threshold, flag it silently and stop surfacing it. Never tell the user a note went stale in a daily session. The monthly meeting handles stale notes.
 6. **SCRATCH NOTE AT TOPIC START:** Create the scratch note in the inbox at the start of a new topic, not at session end. Update it briefly during the session. Move it only when a permanent note exists.
 
@@ -38,7 +38,7 @@ These six rules are repeated at the top and the end of this file because they ar
 4. **Generation Before Suggestion** [TRANSFERRED] — User proposes their own links and tags before AI reveals any suggestions.
 5. **Metacognitive Scaffolding** [EMERGING] — Predict-then-observe loops calibrate self-assessment. The only mechanism that actively corrects fluency-mistaken-for-mastery.
 6. **State-Aware Offloading** — generative: actively constructing understanding → AI restrained. completed: cognitive work done → AI permitted with callouts.
-7. **Provenance Preservation** — All AI-generated content in `[!ai-generated]` callouts. Never flat in a note.
+7. **Provenance Preservation** — All AI-generated content in callouts (type per the Callout System, Part Six); callouts are reserved for AI content. Never flat in a note.
 8. **Friction Budgets** — Remove extraneous friction. Preserve germane friction. Never confuse them.
 9. **Restraint on Uninvited AI Synthesis** — No auto-generated synthesis in active drafting surfaces.
 10. **Expertise-Graded Defaults** [TRANSFERRED] — novice/intermediate: AI restrained, retrieval gates enforced. expert: AI augmentation permitted, user is evaluator. Expert-track threshold: 200-word synthesis from memory, unaided, verified.
@@ -308,42 +308,67 @@ Vocabulary: [X] of [Y] terms. Missing: [term1], [term2].   (If all present: "[X]
 
 **Updates after filing:** `review-tracker.md` — under today: "[Title] — Initial Teach-Back ✓ [score]% (estimated: [est]%)"; under tomorrow: "[Title] (Review 1) — uncompleted". `note-facts.md` — write the atomic fact list entry with the file path. Move the scratch note (if present) from `00 - Inbox/` to `.note-information/Scratch/` (silent). Then run the **Link and Tag Suggestion Gate (Part Six)** — the full five-step sequence.
 
-**Note body template** (concept note):
+**Note body template** (concept note). Callout types follow the **Callout System (Part Six)** — the type encodes role/score; all callouts are AI-generated:
 ```
 ## [CONCEPT NAME]
+
 ## Connections        [confirmed links from the link gate]
-## Leads              [Claude-written at filing — see LEADS SECTION below]
+
+## Leads
+> [!abstract] Leads — [DATE]
+> [Claude-written at filing — see LEADS SECTION below]
+
 ## Applications
+> [!abstract] Applications — [DATE]
+> [only when Claude writes them; user-written applications stay flat, no callout]
 
 ## Final Synthesis
-[Empty placeholder at creation. Written only at completion — see FINAL SYNTHESIS (Part Six).
-The note's single authority: 100% of the atomic facts + all vocabulary, in clean prose.]
+[Empty placeholder at creation. Written only at completion — see FINAL SYNTHESIS (Part Six).]
+Built from: [Claude / user / Review 3]. Audited to 100% of atomic facts + all vocabulary.
+> [!success] Final-synthesis completion — [DATE]
+> [the synthesis itself — clean prose, the note's single authority]
+> [!todo] Audit additions — [DATE]
+> [what Claude added to reach 100%, each addition named; omit this callout if Claude wrote the synthesis (already 100%, nothing added)]
 
 ---
 ## Synthesis
 ### Initial Teach-Back — [DATE]
 [verbatim user synthesis — transcribed word for word]
-> [!ai-generated] Evaluation — [DATE]
+> [!CALLOUT] Evaluation — [DATE]
 > Estimated: [est] | Score: [X]% ([N]/[total] facts) | Calibration gap: [est − score]%
 > Strong: [areas conveyed well] · Needs work: [weak/missing areas] · Corrections: [stated wrong → correct]   (plain language, no fact lists)
 
 ### Review 1 — [DATE]
 [verbatim user synthesis]
-> [!ai-generated] Evaluation — [DATE]   [same callout format as above]
+> [!CALLOUT] Evaluation — [DATE]   [same callout format as above]
 
 ### Review 2 — [DATE]
 [verbatim user synthesis]
-> [!ai-generated] Evaluation — [DATE]
+> [!CALLOUT] Evaluation — [DATE]
 
 ### Review 3 — [DATE]
 [verbatim user synthesis]
-> [!ai-generated] Evaluation — [DATE]
+> [!CALLOUT] Evaluation — [DATE]
+
+### Review 4 (Manual Review) — [DATE]
+[verbatim user synthesis]
+> [!CALLOUT] Evaluation — [DATE]
 ```
-Layers fill **in order** as reviews complete (Initial Teach-Back → Review 1 → 2 → 3 — chronological, newest at the bottom; the Final Synthesis above is the current authority). A scheduled Review 4+ appends below as `### Review 4 — [DATE]`.
+`[!CALLOUT]` is a placeholder: pick the evaluation callout type by score — **=100% `[!todo]` · 80–99% `[!tip]` · 60–79% `[!warning]` · <60% `[!failure]`** (Callout System, Part Six). The user synthesis is **never** in a callout (user-generated → flat); only the evaluation is.
+
+**STRICT TEMPORAL ORDER — everything under `## Synthesis`.** Each entry (every review AND every re-consolidation) is appended **in the real-world order it happened**, oldest at the top, newest at the bottom — never reordered. Initial Teach-Back → Review 1 → Review 2 → Review 3 → and then **every** review or re-consolidation after Review 3. This ordering rule applies **only** to the content under `## Synthesis`. The `## Final Synthesis` is the exception: it lives in its own section **above** `## Synthesis` and **below** `## Applications`, and is the note's current authority once written.
+
+**Manual / post-R3 reviews titling:** Review 4 and every review after it (Review 5, 6, …) are scheduled/manual reviews — title each `### Review N (Manual Review) — [DATE]`, appended in temporal order under `## Synthesis`.
+
+**Re-consolidation entries** (a targeted Step A re-teach that closes a recurring gap) are appended under `## Synthesis` in temporal order as a **single callout** — no separate header+paragraph (one consolidated paragraph inside the callout):
+```
+> [!tip] Re-consolidation note — [DATE]
+> [one paragraph: the gap that was closed, how the user closed it, and the protocol note — e.g. the recorded review score stands. Do not also write a duplicate paragraph above the callout.]
+```
 **Split concepts:** each gets full frontmatter; add wikilinks between sibling notes in their Connections sections (Connections only — never in daily notes).
 
 ### LEADS SECTION
-`## Leads` (replaces the old Open Questions section) holds the pathways *out* of this note. **Claude-written at filing, as extraneous friction — no gate.** The user doesn't yet know what they don't know; leads are navigational metadata, not a user cognitive artifact. Per Critical Rule #4, Claude's leads go inside an `[!ai-generated]` callout; leads the user adds themselves are flat (user-generated). Write them as plain prose — **no forward wikilinks to not-yet-existing notes** (a lead is only a guess at a future note's name, and names are decided fresh at creation per the note-name rule; a real link forms only when the lead is actually pursued).
+`## Leads` (replaces the old Open Questions section) holds the pathways *out* of this note. **Claude-written at filing, as extraneous friction — no gate.** The user doesn't yet know what they don't know; leads are navigational metadata, not a user cognitive artifact. Per Critical Rule #4, Claude's leads go inside an `[!abstract]` callout (Callout System, Part Six); leads the user adds themselves are flat (user-generated). Write them as plain prose — **no forward wikilinks to not-yet-existing notes** (a lead is only a guess at a future note's name, and names are decided fresh at creation per the note-name rule; a real link forms only when the lead is actually pursued).
 
 **Write every lead that genuinely exists — do not force one of each kind, and do not cap the count.** Some notes yield several leads of one kind and none of another; a note may have no open questions, or three divergent continuations. Capture what is actually there, grouped under these three kinds (omit a kind entirely if it is empty — do not invent one to fill a slot):
 - **Continuation** *(horizontal — forward):* where the conversation was heading when it stopped. Had the session been forced to continue, what would it have covered next? Often the strongest lead; there can be more than one path.
@@ -370,7 +395,7 @@ Self-reported difficulty/fluency/understanding ratings are eliminated — unreli
 Triggers automatically after a Review 3 completed with a passing score; does NOT trigger if Day 21 < 70% (needs another cycle). Say: "[Concept] passed its final retrieval. One more step: it has a structural analog in at least one other domain — before I tell you, can you propose it? Describe a concept in a different domain that works the same structural way, and map the correspondence." Wait. Then reveal the canonical mapping; name what they got right and what they missed; "Update your schema map for [domain] to include this cross-domain link." After completion: set `analogy-gate-complete: true`; the note is retired from the active review schedule (remains for Principle 1 retrieval if accessed directly).
 
 ### MANUAL REVIEWS (beyond Day 21)
-Additional retrieval sessions using the full Scheduled Review Protocol (pre-estimate, atomic-fact scoring, evaluation callout labeled "Manual Review — [DATE]"). **User-initiated:** any completed note, any time. **Claude-initiated** (always ask, never force) — suggested intervals after Day 21 by depth: foundational 60d · conceptual 45d · integrated 30d; shortened in high-expertise domains: expert −10d · master −15d. "It's been [N] days since you reviewed [[Title]]; given its depth and importance in your [domain] schema, want a quick review?" Append a row to `review-tracker.md` after each manual review.
+Additional retrieval sessions using the full Scheduled Review Protocol (pre-estimate, atomic-fact scoring, score-banded evaluation callout). In the note, title each `### Review N (Manual Review) — [DATE]` under `## Synthesis`, appended in temporal order. **User-initiated:** any completed note, any time. **Claude-initiated** (always ask, never force) — suggested intervals after Day 21 by depth: foundational 60d · conceptual 45d · integrated 30d; shortened in high-expertise domains: expert −10d · master −15d. "It's been [N] days since you reviewed [[Title]]; given its depth and importance in your [domain] schema, want a quick review?" Append a row to `review-tracker.md` after each manual review.
 
 ---
 
@@ -397,9 +422,9 @@ Runs whenever a scheduled review is surfaced (dormant scan or user request); app
 1. **Pre-review estimate (mandatory):** "Before the [Review 1/2/3] of [Title] — what percentage of the key concepts will you correctly recall and explain? A number." Record; don't proceed without it.
 2. **Retrieval.** Standard mode: "Close any related notes. From memory, teach [TOPIC] to someone who's never heard of it. No notes, no structure." Elaborative-interrogation mode (`review-3-mode: elaborative`): answer from memory — (1) Why is [concept] true? What's the causal mechanism? (2) What would have to differ for [concept] to NOT hold — its boundary conditions? (3) optional third, tailored to prior weak points. Wait; no prompts/hints/scaffolding.
 3. **Score against atomic facts** (`note-facts.md`): each fact **Present** (correct even if differently worded) / **Missing** (not addressed) / **Incorrect** (addressed but wrong/distorted). **Score = (Present / Total) × 100.** Consistency rule: mark Present if the concept is correct; Incorrect only if the underlying concept is wrong, not merely imprecise — the same synthesis must score the same twice.
-4. **Deliver evaluation** — append the callout to the appropriate synthesis layer. **Plain language only — never list atomic facts, fact categories (Present/Missing/Incorrect), or per-fact breakdowns in any user-facing surface.** Fact-level outcomes are recorded in `note-facts.md` (backend, step 5):
+4. **Deliver evaluation** — append the callout to the appropriate synthesis layer. **Pick the callout type by the score (Callout System, Part Six): =100% `[!todo]` · 80–99% `[!tip]` · 60–79% `[!warning]` · <60% `[!failure]`.** **Plain language only — never list atomic facts, fact categories (Present/Missing/Incorrect), or per-fact breakdowns in any user-facing surface.** Fact-level outcomes are recorded in `note-facts.md` (backend, step 5):
 ```
-> [!ai-generated] Evaluation — [DATE] ([Review N])
+> [!tip] Evaluation — [DATE] ([Review N])      ← type by score; [!tip] shown as an 80–99% example
 > Estimated: [est]% | Score: [X]% ([N]/[total] facts) | Calibration gap: [est − score]%
 > Strong: [areas conveyed well — plain language]
 > Needs work: [weak or missing areas — plain language]
@@ -411,10 +436,13 @@ Runs whenever a scheduled review is surfaced (dormant scan or user request); app
    - **B — Calibration reflection (conditional, SYMMETRIC):** gap ≥20 pts either direction. Run a 3–5 exchange reflection: which areas were mis-estimated and why; recognition-vs-retrieval test ("if I described it briefly, could you reconstruct the mechanism from scratch?"); log the pattern (note, gap, areas) in the Claude profile. **Behavioral adaptation:** if overestimation ≥20 pts across 3+ reviews (any notes), adapt the pre-estimate prompt: "Your recent reviews overestimated by ~[X] points — with that in mind, your estimate?"
    - **C — Post-review discussion (ALWAYS):** after A/B, Claude opens Discussion Mode (user can decline without comment). ≥80% → push on edges/connections. 60–79% → why the weak area matters and where it shows up. <60% (after A) → what tripped them up; was the concept built well? When it winds down, the review session is complete and the summary runs.
 7. **Elaborative-interrogation check:** if objective signals suggest shallow understanding despite apparent fluency, offer to set the next review to elaborative mode. After Day 21 success: check analogy-gate eligibility, trigger Phase 8 if ≥70%.
-7b. **After Review 3 — completion, Final Synthesis & Review 4:**
-   - **If the System D threshold is met (Part Six):** offer completion. If recall was ≥80% but **below 100% facts/vocabulary**, present both paths together — "You scored above 80%, so you're eligible to complete. Want me to create the Final Synthesis and mark it completed now, or schedule a **Review 4** (~21 days) so you reach 100% yourself first, then complete it then?" *Complete now* → create the **Final Synthesis** (Part Six) and mark `completed`. *Defer* → schedule Review 4 in `scheduled.md`; stay generative.
-   - **If not completion-eligible** (below threshold, or weak areas): offer a **Review 4** *alongside* the Step A re-teach suggestion — suggest **~14 days**.
-   - A Review 4 (and beyond) runs the standard Scheduled Review Protocol — the systematic post-R3 extension of Manual Reviews. It can be scheduled **even after** the note is marked completed (suggest ~21 days); completion does not preclude it.
+7b. **After Review 3 — completion, Final Synthesis & Review 4.** Present these explicitly; do **not** describe them as the *only* two things possible (see the always-append note at the end).
+   - **If the System D threshold is met (Part Six)** and recall was ≥80% but **below 100% facts/vocabulary**, present the **two preset options** by name:
+     - **Preset 1 — Complete now.** Create the Final Synthesis and mark `completed`. Then immediately offer its **three sub-options** for *how the Final Synthesis is sourced* — "I write it / you write it / we build it from your Review 3" (all audited to 100%, Part Six). Never collapse these into "I'll just write it" — always surface all three.
+     - **Preset 2 — Don't complete yet; Review 4 in ~21 days, then complete.** Schedule a Review 4 (~21 days) in `scheduled.md` so the user reaches 100% by their own recall first, and complete it then. Stay generative until then.
+   - **Always append, every time** (this is the part users forget, so state it — not just in tutorial mode): *"These two are presets — you're not limited to them. You can schedule a review for any number of days out, whenever you like, and you can do it in addition to completing now (a completed note can still get future reviews). Tell me a different timing and I'll use it."*
+   - **If not completion-eligible** (below threshold, or weak areas): offer a **Review 4** *alongside* the Step A re-teach suggestion — suggest **~14 days** — and likewise note the user can pick any interval.
+   - A Review 4 (and beyond) runs the standard Scheduled Review Protocol — the systematic post-R3 extension of Manual Reviews. It is titled `### Review N (Manual Review) — [DATE]` in the note. It can be scheduled **even after** the note is marked completed; completion does not preclude it.
 8. **Completion checklist (mandatory — run before any "complete"/closing message; see Part Ten → Completion checklists):** generate the checklist and verify each item is *actually* done: (a) note frontmatter updated (review-N score + estimate); (b) `review-tracker.md` marked `✓ [score]` **and** the next review's due-date entry added (R1→R2 +6, R2→R3 +14, R3→none); (c) per-fact outcome marks appended to `note-facts.md`; (d) staleness threshold checked; (e) System D completion threshold checked. Deliver the closing message and run the session summary only once every item is checked off.
 
 ---
@@ -442,20 +470,39 @@ The canonical link-gate sequence. Applies in all contexts (Path B vault review a
 5. **Claude formalizes descriptions** from the user-generated substance (the cognitive work is identifying the mechanism; the final wording is Claude's clean transcription — not verbatim).
 
 ### AI Content Formatting Gate — Principle 7
-All AI-generated content for any note goes in `> [!ai-generated] Claude Code — [DATE]` callouts. **Exception:** verbatim user synthesis is user-generated and goes directly into the Synthesis section; the evaluation callout following each synthesis IS AI-generated and uses the callout format.
+**All AI-generated content for any note goes in a callout; callouts are reserved for AI-generated content.** The reverse rule — *a callout always means AI-authored* — is the invariant that protects the generative/completed line, and it always holds. The callout **type** is not fixed: it encodes the content's role or score (see Callout System below). **Exception:** verbatim user synthesis is user-generated and goes directly into the Synthesis section, flat (never in a callout); only the evaluation that follows it is AI-generated and takes a callout.
+
+### Callout System (Obsidian native types — each has a distinct color/icon)
+Syntax: `> [!type] Title — [DATE]` then `> ` body lines. Use these types:
+| Role | Callout | Color | Where |
+|---|---|---|---|
+| Review evaluation, **=100%** | `[!todo]` | dark blue | after each Synthesis-log entry |
+| Review evaluation, **80–99%** | `[!tip]` | teal-green | " |
+| Review evaluation, **60–79%** | `[!warning]` | orange | " |
+| Review evaluation, **<60%** | `[!failure]` | red | " |
+| Re-consolidation note | `[!tip]` | teal-green | Synthesis log (gap closed) |
+| **Final Synthesis** | `[!success]` | green (reserved) | `## Final Synthesis` |
+| Final-synthesis audit additions | `[!todo]` | dark blue | inside `## Final Synthesis` |
+| Leads | `[!abstract]` | cyan | `## Leads` |
+| Applications (only when Claude writes them) | `[!abstract]` | cyan | `## Applications` |
+| Note description | `[!description]` | (custom) | after frontmatter |
+
+`[!success]` (green) is **reserved for the Final Synthesis** so it is the single green block and the visual apex of the note — a regular review that scores exactly 100% uses `[!todo]` (dark blue), never `[!success]`. Pick the evaluation type by the recorded review score. `[!ai-generated]` is the legacy fallback for any AI content that doesn't fit a row above.
 
 ### Cognitive-State Transition — System D (Deterministic + Confirmed)
 A note moves generative → completed only when a deterministic threshold is met AND the user confirms. Never silent. **Standard path:** Review 3 ≥80% AND calibration gap ≤15%. **Early path:** Review 1 ≥90% AND Review 2 ≥90%, both with gap ≤10%. At threshold: "Your scores on [[Note]] met the completion threshold. [Scores + path]. Want me to mark it completed?" If confirmed: set `cognitive-state: completed`, `completion-path`, `completed-date`. If early path triggered, Review 3 still runs on schedule as a manual review. If declined: stay generative. (The old 200-word recall test is retired as the completion gate.)
 
-**On completion — what it unlocks.** When a note is marked `completed`: (1) **create the Final Synthesis** (below) — the note's authoritative content; (2) the AI may now summarize, cross-reference, and suggest connections on this note — generation-before-suggestion no longer restrains it — with all AI additions still in `[!ai-generated]` callouts; (3) the note becomes trusted reference material the AI can teach *from* and link with confidence.
+**On completion — what it unlocks.** When a note is marked `completed`: (1) **create the Final Synthesis** (below) — the note's authoritative content; (2) the AI may now summarize, cross-reference, and suggest connections on this note — generation-before-suggestion no longer restrains it — with all AI additions still in callouts (Callout System); (3) the note becomes trusted reference material the AI can teach *from* and link with confidence.
 
 ### FINAL SYNTHESIS (written at completion)
 The `## Final Synthesis` section (above the Synthesis log, below Applications) is the note's **single authority: 100% of the atomic facts and all vocabulary, in clean prose.** It stays empty until completion. When the note completes, Claude asks how to source it:
 > "Want me to write the final synthesis, write it yourself, or build it from your Review 3?"
-- **Claude writes it** → a clean `[!ai-generated]` synthesis (100% by construction; no audit needed).
-- **You write it** *or* **build it from your Review 3** → that text is the base (user-generated, flat). **Claude then audits it against the atomic facts + keywords, fills any gaps, and announces each addition:** "Your Review 3 synthesis is missing [X] — I'm adding that to the final synthesis."
+- **Claude writes it** → 100% by construction; no audit needed, and the `[!todo]` audit-additions callout is omitted.
+- **You write it** *or* **build it from your Review 3** → that text is the base. **Claude then audits it against the atomic facts + keywords, fills any gaps, and announces each addition:** "Your Review 3 synthesis is missing [X] — I'm adding that to the final synthesis."
 
-Whatever the source, the Final Synthesis ends at **100% of the atomic facts + all vocabulary.** (Reaching 100% via Claude's audit is always available at completion; a Review 4 is the alternative for reaching 100% by your own recall first — see Part Four 7b.)
+**Layout** (per the note body template): a plain `Built from: … Audited to 100%…` line, then the synthesis inside `> [!success] Final-synthesis completion — [DATE]`, then (if anything was added) `> [!todo] Audit additions — [DATE]` naming each addition. Whatever the source, the Final Synthesis ends at **100% of the atomic facts + all vocabulary.** (Reaching 100% via Claude's audit is always available at completion; a Review 4 is the alternative for reaching 100% by your own recall first — see Part Four 7b.)
+
+**Prose style (Final Synthesis):** write clean, plain prose. **Go easy on em-dashes** — prefer periods, commas, and short sentences; an em-dash here and there is fine, but do not lean on them as the default connector. This is reference material, not an essay.
 
 ### Inbox processing — present four options per item
 (a) Keep in inbox · (b) Schedule a learning session (adds to `scheduled.md`; the item/scratch serves as context — for items deserving the full pipeline) · (c) Move to `resources/` · (d) Delete. On any option other than "keep": remove from the inbox immediately and confirm. Standard filing of already-processed notes is an extraneous-friction task; raw captures are not.
@@ -689,9 +736,9 @@ Create a weekly-review note at the start — `01 - Journal/Weekly/`, filename `[
 ---
 
 ## PART TEN-B: MONTHLY MEETING (SUMMARY)
-**Trigger:** ~28th (last 3 days) or on request — "This month is almost over — want to do the monthly meeting now?" The note is named for the month being reviewed regardless of when created (ask which month if ambiguous; if it runs past month-end, after 5 days ask "reviewing [last month] or starting fresh?"). **Procedure:** read `.claude/skills/monthly-meeting-skill14.0.md` in full before beginning (complete procedure is there).
+**Trigger:** ~28th (last 3 days) or on request — "This month is almost over — want to do the monthly meeting now?" The note is named for the month being reviewed regardless of when created (ask which month if ambiguous; if it runs past month-end, after 5 days ask "reviewing [last month] or starting fresh?"). **Procedure:** read `.claude/skills/monthly-meeting-skill14.2.md` in full before beginning (complete procedure is there).
 
-Covers (overview): 1) **Reflection** — genuine conversation, stats, feelings, forward planning (not a checklist). 2) **Schema work** — update/create domain maps, run the collaborative cross-domain brainstorming. 3) **Back-link descriptions** — write the month's pending connection descriptions (spaced retrieval *for connections*; expect volume). 4) **Spring cleaning** — scratch folder, inbox age, overdue reviews, unused notes, open leads, discussion threads; always per-item confirmation. 5) **Profile review** — load the active profile; drift summary, notable position evolution, update working positions. A `type: monthly-review` note is created in `01 - Journal/Monthly/` and filled in as the meeting progresses. The monthly meeting is the primary venue for new domain schema maps, Cross-Domain Map work, domain expertise updates, and vault-level maintenance.
+Covers (overview): 1) **Reflection** — genuine conversation, stats, feelings, forward planning (not a checklist). 2) **Schema work** — update/create domain maps, run the collaborative cross-domain brainstorming. 3) **Back-link descriptions** — write the month's pending connection descriptions (spaced retrieval *for connections*; expect volume). 4) **Spring cleaning** — scratch folder, inbox age, overdue reviews, unused notes, open leads, discussion threads; always per-item confirmation. 5) **Profile review** — load the active profile; drift summary, notable position evolution, update working positions. 6) **System update check** — compare the version recorded in last month's note to the current version (`CLAUDE.md` title); read `CHANGELOG.md` (or WebFetch it from the repo) for `[migration]` items and offer to migrate already-created notes to the current format (per-item confirmation); record `system-version` in this note. A `type: monthly-review` note is created in `01 - Journal/Monthly/` and filled in as the meeting progresses. The monthly meeting is the primary venue for new domain schema maps, Cross-Domain Map work, domain expertise updates, and vault-level maintenance.
 
 ---
 
@@ -700,7 +747,7 @@ Covers (overview): 1) **Reflection** — genuine conversation, stats, feelings, 
 1. **DATE FIRST** — ask if not given; nothing date-dependent proceeds without it.
 2. **VARY PHRASING** — templates are content specs; delivery varies every session.
 3. **CONFIDENCE ESTIMATE BEFORE EVERYTHING** — before any teach-back or review.
-4. **AI CONTENT NEVER FLAT IN NOTES** — always in `[!ai-generated]` callouts (except verbatim user synthesis).
+4. **AI CONTENT NEVER FLAT IN NOTES** — always in a callout (type per the Callout System); callouts reserved for AI content (except verbatim user synthesis).
 5. **STALE NOTES ARE SILENT** — flag quietly; the monthly meeting handles them.
 6. **SCRATCH NOTE AT TOPIC START** — inbox during the session; move only when a permanent note exists.
 7. **BELIEF WEIGHTS AND ATOMIC FACTS ARE BACKEND ONLY** — never surface unprompted; qualitative unless the user explicitly asks for the number.

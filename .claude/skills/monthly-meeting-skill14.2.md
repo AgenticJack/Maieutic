@@ -1,4 +1,4 @@
-# Monthly Meeting Skill (14.0)
+# Monthly Meeting Skill (14.2)
 ## Full Procedure for the Monthly Learning Review and Spring Cleaning
 
 ---
@@ -9,12 +9,13 @@ This file contains the complete monthly meeting procedure. It is read by
 Claude only when a monthly meeting is triggered — not at every session start.
 The main skill file contains a brief summary pointing here.
 
-The monthly meeting has five parts:
+The monthly meeting has six parts:
 Part 1 — Reflection: a genuine conversation about the month
 Part 2 — Schema work: review, update, and cross-domain brainstorming
 Part 3 — Back-link descriptions: spaced retrieval for the connections between notes
 Part 4 — Spring cleaning: vault maintenance with user confirmation on everything
 Part 5 — Profile review and calibration summary
+Part 6 — System update check: migrate already-created notes to the current version
 
 A monthly-review note is created at the start and filled in as the meeting
 progresses. Nothing is deleted without explicit per-item user confirmation.
@@ -62,6 +63,7 @@ average-calibration-gap: [fill in]
 schema-maps-updated: [fill in]
 backlink-descriptions: [done / scheduled — fill in during Part 3]
 spring-cleaning-actions: [fill in during Part 4]
+system-version: [current system version, e.g. 14.2 — set during Part 6; next month's update check reads this]
 ---
 
 ## [Month Year] Monthly Review
@@ -444,6 +446,65 @@ or close it as explored-but-unresolved?"
 
 ---
 
+## PART 6 — SYSTEM UPDATE CHECK
+
+The Maieutic system itself gets updated (new skill versions change how notes are
+structured — e.g. 14.2 introduced score-banded evaluation callouts and the
+Final-Synthesis `[!success]`/`[!todo]` format). When a user updates mid-stream,
+their **already-created notes** still use the old structure. This part finds the
+gap and offers to migrate existing notes to the current format. Like spring
+cleaning, **nothing is changed without per-item confirmation.**
+
+### Step 6a — Did anything change?
+Ask: "Have you updated the system since the last monthly meeting — pulled new
+skill files, bumped the version, or changed any templates?" Then establish the
+two versions:
+- **Current version** = the version in `CLAUDE.md`'s title (e.g. `14.2`).
+- **Last-reviewed version** = the `system-version:` recorded in the *previous*
+  monthly-review note. If there is none (first time, or never recorded), ask the
+  user what version their existing notes were built under.
+
+If the two match and the user reports no changes → record the current version in
+this meeting's note (Step 6d) and skip the rest.
+
+### Step 6b — Find what changed (the changelog is the source of truth)
+Read `CHANGELOG.md` at the vault root and collect every entry **between** the
+last-reviewed version and the current version. Each changelog entry flags items
+as **[migration]** when they affect already-created notes (callout formats,
+frontmatter fields, section layout, file naming). Non-migration entries
+(behavioral or doc-only changes) need no note edits — mention them briefly and
+move on.
+
+If `CHANGELOG.md` is missing or stale (the user pulled skill files without it),
+Claude can **WebFetch the canonical copy** from the public repo:
+`https://raw.githubusercontent.com/AgenticJack/Maieutic/main/CHANGELOG.md`
+(or a tagged ref, e.g. `.../v14.2/CHANGELOG.md`). WebFetch also works on the
+older skill files themselves
+(`https://raw.githubusercontent.com/AgenticJack/Maieutic/<ref>/.claude/skills/<file>`)
+if a direct before/after comparison is needed. If WebFetch is unavailable in the
+current agent, fall back to asking the user to paste the changelog entries.
+
+### Step 6c — Migrate existing notes (per-item, confirmed)
+For each **[migration]** item, identify the already-created notes it affects and
+walk them with the user, exactly like spring cleaning — show the old form, show
+the new form, apply on confirmation. Examples:
+- *14.2 — score-banded evaluation callouts:* for each existing note, re-type each
+  `> [!ai-generated] Evaluation` callout to its score band using the score already
+  recorded in that callout/in `review-tracker.md` — `=100% [!todo] · 80–99%
+  [!tip] · 60–79% [!warning] · <60% [!failure]`. Leads/Applications → `[!abstract]`.
+- *14.2 — Final-Synthesis format:* completed notes get the `[!success]` /
+  `[!todo]` layout; re-consolidation paragraphs collapse into a single `[!tip]`.
+
+Batch obvious mechanical conversions (extraneous-friction, Principle 8) but still
+confirm the batch before applying. Skip notes the change doesn't touch.
+
+### Step 6d — Record the version
+Write `system-version: [current]` into this meeting's monthly-review note (Stats
+block) so next month's Step 6a knows the baseline. Log migrated notes in the
+Spring Cleaning Log.
+
+---
+
 ## END-OF-MEETING AUDIT CHECKLIST
 
 Before declaring the meeting closed, run this checklist. Every item must have
@@ -452,6 +513,9 @@ a status — the meeting does not close with open items.
 For any item marked incomplete, Claude prompts: "We didn't get to [item]. Want
 to handle it now, explicitly defer it to next month, or mark it as not
 applicable this month?" The user must choose one before proceeding.
+
+□ System update check — versions compared, [migration] items applied or deferred,
+  and `system-version` recorded in this note?
 
 □ Back-link descriptions — all pending "description pending monthly meeting"
   placeholders in 02 - Notes/ addressed? (written, deferred, or N/A)

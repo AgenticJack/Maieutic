@@ -44,6 +44,7 @@ The behavior is built on established learning science (full syntheses in `.claud
 CLAUDE.md            # Entry point for Claude Code (full operating instructions)
 AGENTS.md            # Entry point for any other AI agent
 LICENSE              # MIT
+CHANGELOG.md         # Versioned changes; drives the monthly meeting's update check
 .claude/
   skills/            # The behavioral spec: pkm-principles, monthly-meeting, tutorial-mode, Schema-Mapping
   Foundations/       # 5 research syntheses + an index (read per-mode)
@@ -67,7 +68,7 @@ Templates/
 5. **(Optional) Add source libraries** to `resources/` in the format shown in `resources/Learning Science/`.
 6.  **(Optional) Optimal setup** I run the system in VS code with Claude Code chatting open on half my screen and Obsidian with my notes open on the other.
 
-A guided in-product walkthrough is available: keep `tutorial-mode14.0.md` in `.claude/skills/` (delete it to turn tutorial narration off).
+A guided in-product walkthrough is available: keep `tutorial-mode14.2.md` in `.claude/skills/` (delete it to turn tutorial narration off).
 
 ## Customization
 

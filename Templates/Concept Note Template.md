@@ -8,7 +8,7 @@ schema is authoritative in `CLAUDE.md → Frontmatter Schema`; this is the body.
 Every concept note **starts `cognitive-state: generative`** — never `completed`
 at creation, no matter how high the teach-back scored. It becomes `completed`
 only later, via System D, after Review 3 (or the early path). See
-`.claude/skills/pkm-principles14.0.md`, Parts Four & Six.
+`.claude/skills/pkm-principles14.2.md`, Parts Four & Six.
 
 ---
 
@@ -46,39 +46,67 @@ review-1: uncompleted
 > [Optional: what this note explicitly does NOT cover]
 
 ## [CONCEPT NAME]
+
 ## Connections        [confirmed links from the link gate — [[wikilinks]] only here]
-## Leads              [AI-written at filing: Continuation / Deepening / Bridge leads,
-                       inside an [!ai-generated] callout; plain prose, no forward wikilinks]
+
+## Leads
+> [!abstract] Leads — [DATE]
+> [AI-written at filing: Continuation / Boundary / Open-question leads; plain prose, no forward wikilinks]
+
 ## Applications
+> [!abstract] Applications — [DATE]
+> [only when Claude writes them; user-written applications stay flat, no callout]
 
 ## Final Synthesis
-[Empty at creation. Written ONLY at completion — the note's single authority:
-100% of the atomic facts + all vocabulary, in clean prose. Sourced three ways
-(AI writes it / you write it / built from Review 3); any non-AI source is audited
-to 100% with each addition announced.]
+[Empty at creation. Written ONLY at completion. Sourced three ways
+(I write it / you write it / build from Review 3); any non-AI source is audited
+to 100% of the atomic facts + all vocabulary, with each addition announced.]
+Built from: [Claude / user / Review 3]. Audited to 100% of atomic facts + all vocabulary.
+> [!success] Final-synthesis completion — [DATE]
+> [the synthesis itself — clean, plain prose, the note's single authority.
+> Go easy on em-dashes: prefer periods and commas.]
+> [!todo] Audit additions — [DATE]
+> [what Claude added to reach 100%, each addition named.
+> Omit this callout entirely if Claude wrote the synthesis (already 100%).]
 
 ---
 ## Synthesis
 ### Initial Teach-Back — [DATE]
 [verbatim user synthesis — transcribed word for word]
-> [!ai-generated] Evaluation — [DATE]
+> [!CALLOUT] Evaluation — [DATE]
 > Estimated: [est] | Score: [X]% ([N]/[total] facts) | Calibration gap: [est − score]%
 > Strong: [...] · Needs work: [...] · Corrections: [stated wrong → correct]
 
 ### Review 1 — [DATE]
 [verbatim user synthesis]
-> [!ai-generated] Evaluation — [DATE]
+> [!CALLOUT] Evaluation — [DATE]
 
 ### Review 2 — [DATE]
 [verbatim user synthesis]
-> [!ai-generated] Evaluation — [DATE]
+> [!CALLOUT] Evaluation — [DATE]
 
 ### Review 3 — [DATE]
 [verbatim user synthesis]
-> [!ai-generated] Evaluation — [DATE]
+> [!CALLOUT] Evaluation — [DATE]
+
+### Review 4 (Manual Review) — [DATE]
+[verbatim user synthesis]
+> [!CALLOUT] Evaluation — [DATE]
+
+> [!tip] Re-consolidation note — [DATE]
+> [a Step A re-teach that closed a recurring gap: one paragraph covering the gap,
+> how the user closed it, and the protocol note (e.g. the recorded score stands).
+> One callout only — no duplicate paragraph above it.]
 ```
 
-The Synthesis layers fill **in strict order** as reviews complete (Initial
-Teach-Back → Review 1 → 2 → 3 — chronological, newest at the bottom). The
-`## Final Synthesis` above is the current authority once written. A scheduled
-Review 4+ appends below as `### Review 4 — [DATE]`.
+**Evaluation callout type is by score** (`[!CALLOUT]` is a placeholder):
+**=100% `[!todo]` (blue) · 80–99% `[!tip]` (teal) · 60–79% `[!warning]` (orange) · <60% `[!failure]` (red)**.
+Green `[!success]` is reserved for the Final Synthesis. The user's synthesis is
+never in a callout (user-generated → flat); only the evaluation is.
+
+**Strict temporal order under `## Synthesis`:** every review AND every
+re-consolidation is appended in the real order it happened, oldest at top, newest
+at bottom, never reordered. Initial Teach-Back → Review 1 → 2 → 3 → then every
+later review/re-consolidation. Review 4+ are titled `### Review N (Manual Review)
+— [DATE]`. This ordering applies only under `## Synthesis`; the `## Final
+Synthesis` is the exception and lives above it (below `## Applications`).

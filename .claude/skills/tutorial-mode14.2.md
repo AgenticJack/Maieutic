@@ -199,9 +199,10 @@ check, not a planning session. The monthly meeting is where the deeper
 review and planning happen."
 
 **First monthly meeting:**
-"Five parts: reflection on how the month went, schema work and cross-domain
+"Six parts: reflection on how the month went, schema work and cross-domain
 brainstorming, writing descriptions for the month's pending back-links,
-spring cleaning of the vault, and a profile review. Nothing is deleted
+spring cleaning of the vault, a profile review, and a system update check
+(migrating older notes if you've updated Maieutic). Nothing is deleted
 without you confirming each item individually."
 
 **First stale note:**
@@ -860,9 +861,25 @@ Frontmatter key fields:
   a value that is "uncompleted" until replaced with the actual score.
 
 Synthesis section (bottom of the note, after Connections):
-- Layered record of every retrieval event.
+- Layered record of every retrieval event, in strict time order — oldest at the
+  top, newest at the bottom, never reordered.
 - Teach-Back [DATE] → evaluation callout → Review 1 [DATE] → evaluation callout
-  → Review 2 → ... Each layer shows what you recalled and what the system found.
+  → Review 2 → ... Each layer shows what you recalled (your words, verbatim, never
+  in a callout) and what the system found (the evaluation, always in a callout).
+- Reviews after Review 3 are titled "Review N (Manual Review) — [DATE]".
+
+The callout colors are a code — you can read a note's health at a glance:
+- **Evaluation callouts are colored by your score:** dark-blue `[!todo]` = 100% ·
+  teal `[!tip]` = 80–99% · orange `[!warning]` = 60–79% · red `[!failure]` = below
+  60%. Scanning the Synthesis section, the colors trend from warm toward cool as
+  you improve.
+- **Green `[!success]` is reserved for the Final Synthesis** — the one green block,
+  the note's apex, written only at completion. Under it, a dark-blue `[!todo]`
+  "Audit additions" callout lists anything Claude added to reach 100%.
+- A teal `[!tip]` "Re-consolidation note" marks a gap you closed in a targeted
+  re-teach. Cyan `[!abstract]` callouts hold Leads and AI-written Applications.
+- The rule behind all of it: **a callout always means Claude wrote it.** Your own
+  words are never in a callout. So if it's in a colored box, the AI authored it.
 
 Leads section (between Connections and Applications):
 - This replaced what used to be called "Open Questions." Leads are the
@@ -1023,7 +1040,7 @@ So this is genuinely optional: the file is a vocabulary, not a switch. Take it,
 replace it, or remove it to taste.
 
 **Tutorial Mode:**
-You're in it now. When you're ready to leave: delete tutorial-mode14.0.md
+You're in it now. When you're ready to leave: delete tutorial-mode14.2.md
 from .claude/skills/. Nothing else changes — Claude just stops narrating its
 mechanics and offering tips. The vault operates identically.
 
@@ -1041,7 +1058,7 @@ Creates a weekly-review note. Brief. Not annoying.
 
 **Monthly meeting:**
 Prompted around the 28th. Named after the month being reviewed.
-Five parts:
+Six parts:
 
 Part 1 — Reflection: genuine conversation about the month. Stats (notes
 created, reviews completed, average scores, calibration trends). How you feel
@@ -1069,6 +1086,14 @@ outside Discussion Mode, so this is one of the few places it's loaded
 deliberately), then a calibration trend summary (consistent overestimation
 pattern this month?), notable intellectual evolution, and any open discussion
 questions worth revisiting.
+
+Part 6 — System update check: if you've updated Maieutic since last month (new
+skill version, pulled files), your *already-created* notes still use the old
+format. Claude compares the version recorded in last month's note to the current
+one, reads CHANGELOG.md for what changed, and offers to migrate your existing
+notes to the new structure — per-item confirmation, like spring cleaning. For
+example, updating into 14.2 would re-color your old evaluation callouts by score.
+This is why the system keeps a CHANGELOG.md and records a version each month.
 
 Creates a monthly-review note documenting everything.
 
@@ -1233,7 +1258,7 @@ free-form as you want.
 ---
 ## DELETING THIS FILE
 
-Delete `tutorial-mode14.0.md` from `.claude/skills/`.
+Delete `tutorial-mode14.2.md` from `.claude/skills/`.
 
 The vault system is identical. Claude stops narrating mechanics, explaining
 procedures, and offering first-encounter tips. Every other behavior remains
