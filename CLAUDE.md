@@ -151,6 +151,11 @@ Do not treat it as code. Do not run linters or formatters on it.
   intentional. Do not modify them unless explicitly asked.
 - Tags (#tag) in frontmatter and inline are valid. Do not remove.
 - Callout blocks (> [!type]) are valid Obsidian syntax.
+- Notes are **pure Markdown**. Never write XML/HTML wrapper tags into a note —
+  no `<content>`/`</content>`, `<note>`, `<body>`, or any stray closing tag.
+  Obsidian renders these in red as broken syntax. If you were handed content
+  wrapped in such tags, strip them and write only the inside; a note ends on its
+  last real line with nothing after it.
 
 FRONTMATTER IS YAML — WRITE IT SAFELY (this prevents the all-red property
 errors in Obsidian):

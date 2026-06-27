@@ -16,6 +16,12 @@ between. If this file is missing or behind, the AI can fetch the canonical copy:
 
 ## 14.2
 
+- **[migration] Strip stray wrapper tags from note bodies.** Some notes picked up
+  a literal `</content>` (or similar XML/HTML-style tag) at the very bottom — a
+  generation artifact, not part of any template. Obsidian renders it red as broken
+  syntax. Added a guard (notes are pure Markdown; no wrapper tags) and a
+  completion-checklist item. *Existing notes:* delete any trailing `</content>` /
+  `<content>` / `<note>` / `<body>` tag so nothing sits after the last real line.
 - **[migration] Fully native callouts (custom types retired).** The two remaining
   custom callout types are gone, so every callout renders with a real color/icon
   for anyone who clones the vault — no CSS snippet needed. `[!description]` →
