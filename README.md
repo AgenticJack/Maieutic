@@ -46,7 +46,7 @@ AGENTS.md            # Entry point for any other AI agent
 LICENSE              # MIT
 CHANGELOG.md         # Versioned changes; drives the monthly meeting's update check
 .claude/
-  skills/            # The behavioral spec: pkm-principles, monthly-meeting, tutorial-mode, Schema-Mapping
+  skills/            # The behavioral spec (every file read at startup): pkm-principles, monthly-meeting, tutorial-mode, Schema-Mapping, Delegation
   Foundations/       # 5 research syntheses + an index (read per-mode)
   Transcripts/       # Exemplar teaching transcripts (read on demand) + index
   Profiles/          # Profile-1: the default intellectual profile for Discussion Mode
@@ -68,12 +68,14 @@ Templates/
 5. **(Optional) Add source libraries** to `resources/` in the format shown in `resources/Learning Science/`.
 6.  **(Optional) Optimal setup** I run the system in VS code with Claude Code chatting open on half my screen and Obsidian with my notes open on the other.
 
-A guided in-product walkthrough is available: keep `tutorial-mode14.2.md` in `.claude/skills/` (delete it to turn tutorial narration off).
+A guided in-product walkthrough is available: keep `tutorial-mode15.0.md` in `.claude/skills/` (delete it to turn tutorial narration off).
 
 ## Customization
 
 - **Profiles** (`.claude/Profiles/`): the shipped `Profile-1` is a neutral, learning-science-grounded default. Create your own (`Profile-2`, …) and `load` / `activate` them; they shape Discussion Mode.
 - **Schema notation** (`.claude/skills/Schema-Mapping.md`): a swappable, deletable module: swap it for your own mapping system, or delete it to map notationlessly (relationships described in plain language).
+- **Delegation** (`.claude/skills/Delegation.md`): an optional cost layer — when your agent can spawn cheaper subagents, they do the token-heavy mechanical work (bulk scans, batch edits) while the main model keeps all teaching and judgment. Delete the file to run everything inline.
+- **Add your own skills**: every file in `.claude/skills/` is read at startup, so you can drop in an overlay or house-style file and it takes effect — no need to edit `CLAUDE.md`.
 - **Libraries** (`resources/`): free-form, but every source carries `[CLAUDE]` / `[MARKDOWN]` / `[NOTEBOOKLM]` accessibility labels.
 
 ## Notes

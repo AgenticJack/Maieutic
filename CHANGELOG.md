@@ -14,6 +14,39 @@ between. If this file is missing or behind, the AI can fetch the canonical copy:
 
 ---
 
+## 15.0
+
+- **[migration] The `depth` field is retired.** The foundational / conceptual /
+  integrated depth classification is gone — in practice nearly every note was
+  "conceptual," so it was bloat. *Existing notes:* the `depth:` frontmatter line
+  can be deleted whenever a note is next touched (harmless if left). Manual-review
+  intervals after Day 21 are now judged by importance, not depth.
+- **[migration] Schema maps become real concept maps (hybrid).** Each domain map
+  now carries TWO Mermaid blocks: a lightweight `mindmap` overview (hierarchy) and
+  a `flowchart` **concept map** with typed-shape nodes and *labeled* relationship
+  edges (`A -- causes --> B`), scoped to a focus question. The old single
+  `mindmap` (hierarchy only, depth-bracket encoded) could not carry labeled
+  relationships, which made it near-redundant with the graph view. *Existing
+  maps:* rebuild via a user-led walk-through during a monthly meeting (not an
+  auto-convert — maps are user-authored).
+- **Subagent delegation layer (new, optional).** A new `.claude/skills/Delegation.md`
+  defines when cheaper subagents may do token-heavy *mechanical* work (bulk note
+  scans, batch edits, large-source indexing) while the main model keeps all
+  teaching, scoring, dialogue, generation, and judgment. Deletable; inert if the
+  agent can't spawn subagents. No effect on existing notes.
+- **Monthly Review Integrity Audit (new — Part 4B).** Each month (or on request)
+  the AI reconciles every note against the trackers in both directions, catching
+  orphaned notes, ghost tracker entries, broken review chains, stalled notes,
+  missing Final Syntheses, overdue pile-ups, and schedule orphans. No effect on
+  existing notes beyond surfacing what already slipped.
+- **Skills folder is now the extension point.** `CLAUDE.md` no longer names
+  individual skill files; at startup the AI reads *every* file in `.claude/skills/`
+  (except any marked read-on-demand, currently just the monthly-meeting skill).
+  Drop a skill file in to add behavior; delete one to remove its feature. No
+  effect on existing notes.
+
+---
+
 ## 14.2
 
 - **[migration] Strip stray wrapper tags from note bodies.** Some notes picked up

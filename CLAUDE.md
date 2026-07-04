@@ -1,4 +1,4 @@
-# Maieutic — Vault Instructions for the AI Assistant (14.2)
+# Maieutic — Vault Instructions for the AI Assistant (15.0)
 
 Designed for: Claude Code
 Works with any capable AI coding agent (Codex, Cursor, Copilot, Aider, etc.) —
@@ -9,7 +9,19 @@ instructions are model-agnostic: wherever they say "Claude," it means you.
 
 At the start of every session, before responding to anything:
 0. Confirm today's date with the user. If the user's opening message does not state the date, ask immediately: "What is today's date?" Do not proceed with any date-dependent action until the date is confirmed in the current conversation. Do not use memory, inference, chat history, or any external source for the date.
-1. Read `.claude/skills/pkm-principles14.2.md` in full
+1. Read the `.claude/skills/` folder — read **every** skill file in it, in full,
+   EXCEPT any file whose own opening lines declare it is read on-demand. Do not
+   rely on a hardcoded list of filenames here; read whatever is actually in the
+   folder. Currently the only on-demand file is `monthly-meeting-skill*.md` (read
+   when the monthly meeting runs, not at startup). So at startup you read
+   `pkm-principles*.md` (the core spec — always) plus every other skill file
+   present — e.g. `Schema-Mapping.md`, `Delegation.md`, `tutorial-mode*.md`, and
+   any overlay a user has added — and you apply each one. A skill file's
+   **absence disables that feature** (no `Schema-Mapping.md` → schema maps run
+   notationless; no `Delegation.md` → do everything inline; no `tutorial-mode`
+   → no tutorial narration). **This folder is the vault's extension point: to add
+   or change behavior, drop a skill file in `.claude/skills/` — you never edit
+   this document to point at it.**
 2. Read `.claude/Foundations/Foundations-Index.md` — the index of the foundational
    research reports (what each establishes + when to read it). Do NOT read the
    reports at startup. Read the relevant report when its mode activates
@@ -31,12 +43,12 @@ At the start of every session, before responding to anything:
    full body only if the user says yes. If none is active, don't ask. The active
    profile's full body also auto-loads silently before any Discussion session
    (skill Part Seven).
-7b. Read `.claude/skills/Schema-Mapping.md` IF PRESENT — the schema mapping
-    notation system (node types, arrow families, sub-relationships, proposition
-    standard); use its vocabulary in all schema mapping discussions. The file is
-    optional and deletable: if it is absent, schema mapping still runs
-    notationless — describe relationships in plain/colloquial language (the
-    rendered Mermaid diagram never uses the arrow types anyway).
+7b. Schema mapping and delegation are configured by their skill files, already
+    read in step 1 if present: `Schema-Mapping.md` supplies the concept-map
+    notation (use its vocabulary; absent → notationless, plain-language
+    relationships); `Delegation.md` supplies the subagent policy (absent → do
+    everything inline). Nothing extra to read here — this is just the reminder
+    that their presence/absence is what turns those features on or off.
 7c. MEETING CHECKS (runs after date confirmation, during startup):
 
     WEEKLY MEETING CHECK:
@@ -62,10 +74,10 @@ At the start of every session, before responding to anything:
     catch it up now or skip it?"
 
     If neither condition: proceed normally with no mention.
-8. Check for `.claude/skills/tutorial-mode14.2.md` (or current version). If present, read it in full
-   and apply its behavioral overlays throughout the session. If absent, skip.
-   No other file references tutorial mode — its presence or absence is the
-   only signal.
+8. Tutorial mode: `tutorial-mode*.md` is read via step 1 if present — apply its
+   behavioral overlays throughout the session. Its presence or absence is the
+   only signal; no other file references it (delete the file to turn tutorial
+   narration off).
 9. Run the SESSION START — Morning Ritual defined in the skill file
 
 Do not wait to be asked. Do not summarize any of these files back to the user.
@@ -189,10 +201,10 @@ YourVault/
                                 themselves read per-mode, not at startup)
     Transcripts/              — Exemplary teacher transcripts
     skills/
-      pkm-principles14.2.md
+      pkm-principles15.0.md
       Schema-Mapping.md      — Schema mapping notation system (replaceable; delete → notationless)
-      monthly-meeting-skill14.2.md
-      tutorial-mode14.2.md       — DELETE this file to disable tutorial narration
+      monthly-meeting-skill15.0.md
+      tutorial-mode15.0.md       — DELETE this file to disable tutorial narration
     GOALS.md                  — Long-term learning goals and objectives
   .note-information/          — All external metadata for notes (hidden)
     Scratch/                  — Scratch notes after session ends
@@ -277,7 +289,6 @@ Every permanent concept note:
 date: YYYY-MM-DD
 last-modified: YYYY-MM-DD
 cognitive-state: generative     # generative | completed
-depth: foundational             # foundational | conceptual | integrated
 type: concept                   # see Note Types below
 tags: []
 recall-score:                   # most recent review score %; auto-updated
@@ -346,10 +357,9 @@ silently adds to note A's Connections section:
 `- [[Note B]] — back-link added YYYY-MM-DD, description pending monthly meeting`
 This is replaced at the monthly meeting when the user writes the description.
 
-Backward compatibility: Notes created before 6.0 may have an `expertise` field.
-This is legacy data. When such a note is substantially touched, offer to migrate:
-"This note has a legacy expertise field. Want me to replace it with the new
-depth field?"
+Backward compatibility: Notes created before 6.0 may have an `expertise` field,
+and notes created before 15.0 may have a `depth` field. Both are legacy data.
+When such a note is substantially touched, offer to remove the stale field.
 
 Daily notes: date, last-modified, morning-ritual, status, tags only. No wikilinks.
 Future daily notes (created in advance for scheduling): use status: future.
@@ -362,24 +372,24 @@ and appends standard sections below the Scheduled section.
 
 **type: concept**
 A mechanism, process, theory, or principle requiring explanation of how or
-why it works. Has depth field, full synthesis layers, full review schedule.
+why it works. Full synthesis layers, full review schedule.
 
 **type: schema-map**
 One per subject domain. Lives in `03 - Schemas/`. Structured outline of the
-knowledge architecture for that domain, including concept relationships,
-depth levels, and the domain expertise rating.
+knowledge architecture for that domain, including concept relationships and
+the domain expertise rating.
 
-**type: schema-map — Mermaid Mindmap Format:**
-Each domain schema map includes a Mermaid mindmap block at the top.
-Node bracket type encodes depth:
-- `[Concept]` — foundational depth
-- `(Concept)` — conceptual depth
-- `((Concept))` — integrated depth or cross-domain link
-- Plain text (no brackets) — section headers only
-
-The mindmap is built incrementally — one node added per new note.
-The text outline below it remains the authoritative record.
-Both must stay in sync.
+**type: schema-map — two Mermaid blocks (overview + concept map):**
+Each domain schema map carries TWO Mermaid blocks plus the authoritative text
+outline below them (full spec in `.claude/skills/Schema-Mapping.md`):
+1. **Mind-map overview** (`mindmap`) — a lightweight hierarchy: the domain
+   chunked into a few subcategories and sub-subcategories. Quick orientation.
+   Nodes are plain (no depth-bracket encoding — the `depth` system is retired).
+2. **Concept map** (`flowchart`) — the real schema: typed-shape nodes and
+   **labeled relationship edges** (`A -- causes --> B`), scoped to a focus
+   question. This is what carries meaning the graph view cannot (it has only
+   untyped links). Built one proposition at a time, user-led.
+Both blocks are built incrementally and stay in sync with the text outline.
 
 **type: cross-domain-map**
 One for the entire vault. Lives in `03 - Schemas/Cross-Domain Map.md`.
@@ -428,23 +438,7 @@ profile's Persistent Memory does.
 
 **type: monthly-review**
 Lives in `01 - Journal/Monthly/`. Full reflection plus spring cleaning log.
-Created during the monthly meeting. Full procedure in monthly-meeting-skill14.2.md.
-
----
-
-## Depth Field
-
-The `depth` field on concept notes describes the complexity of the note's
-content, not the user's mastery level. Three values:
-
-- **foundational:** A single mechanism or principle explained at the level
-  needed for standard understanding. One concept, one mechanism.
-- **conceptual:** Multiple interacting mechanisms, significant nuance, or
-  relationships that must be understood for the concept to make sense.
-- **integrated:** Synthesizes across multiple other concepts in non-obvious
-  ways. Rare — if a note reaches this depth, it likely should be split.
-
-Claude assigns depth at note creation based on content. The user may override.
+Created during the monthly meeting. Full procedure in monthly-meeting-skill15.0.md.
 
 ---
 

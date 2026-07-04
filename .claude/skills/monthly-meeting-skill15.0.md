@@ -1,4 +1,4 @@
-# Monthly Meeting Skill (14.2)
+# Monthly Meeting Skill (15.0)
 ## Full Procedure for the Monthly Learning Review and Spring Cleaning
 
 ---
@@ -63,7 +63,7 @@ average-calibration-gap: [fill in]
 schema-maps-updated: [fill in]
 backlink-descriptions: [done / scheduled — fill in during Part 3]
 spring-cleaning-actions: [fill in during Part 4]
-system-version: [current system version, e.g. 14.2 — set during Part 6; next month's update check reads this]
+system-version: [current system version, e.g. 15.0 — set during Part 6; next month's update check reads this]
 ---
 
 ## [Month Year] Monthly Review
@@ -127,15 +127,18 @@ collaborative cross-domain brainstorming. Take them in order.
 
 For each domain schema map in `03 - Schemas/`:
 
-1. Read the schema map (both Mermaid mindmap block and text outline below it)
+1. Read the schema map — both Mermaid blocks (the `mindmap` overview and the
+   `flowchart` concept map) and the authoritative text outline below them
 2. Cross-reference it with notes created and reviewed this month
 3. Ask the user to walk through their current understanding of the domain
-   structure — what they think the key nodes and connections are.
+   structure — the key nodes, and the *relationships* between them.
 4. After the user describes their structure: verify connections that don't
    hold, suggest additions the user missed. User confirms changes.
-5. Claude transcribes confirmed changes into the Mermaid mindmap and text
-   outline. Both must stay in sync.
-   - [Concept] = foundational, (Concept) = conceptual, ((Concept)) = integrated
+5. Claude transcribes confirmed changes into both Mermaid blocks and the text
+   outline (all three stay in sync). For each concept-map edge, ask the user for
+   the **relationship label** before drawing it (causes / requires / inhibits /
+   supports / is-a…, per `Schema-Mapping.md`) — never invent the label. The
+   mind-map overview stays a plain hierarchy.
 6. Identify concepts added since the last audit that are not yet in the schema
    map — surface these to the user for placement.
 
@@ -405,6 +408,49 @@ Let the user direct this part entirely.
 
 ---
 
+## PART 4B — REVIEW INTEGRITY AUDIT (nothing falls through silently)
+
+Spring cleaning works from the trackers; this part verifies the trackers
+themselves. Every note in `02 - Notes/` is checked against `review-tracker.md`
+and `scheduled.md` so that nothing has silently fallen out of the system.
+
+Also runs **on request** any time ("audit my vault"), not only monthly.
+
+**Delegate the scan (see `Delegation.md`).** Fan subagents out over
+`02 - Notes/` in batches (~10–15 notes each). Each subagent returns, per note,
+a structured report — no prose, no judgment:
+- path + title · `cognitive-state` · `tags`
+- which review fields exist and their status (`review-N`, due dates, scores)
+- `completed-date`/`completion-path` if present
+- structural flags: missing `## Final Synthesis` on a completed note, missing
+  sections, stray wrapper tags, callout-format drift
+If subagents are unavailable, do the same scan inline in batches.
+
+**Reconcile (orchestrator — never delegated).** Check **both directions** —
+notes → trackers (catches orphans) and trackers → notes (catches ghosts) — a
+one-way pass misses half the failures. Flag these classes, most-severe first:
+1. **Orphaned notes** — a due/overdue review on the note with no tracker entry.
+2. **Ghost entries** — tracker/scheduled entries pointing at renamed, moved, or
+   missing notes.
+3. **Broken chains** — Review N completed but Review N+1 never scheduled
+   (R1→R2, R2→R3).
+4. **Stalled notes** — generative, all three reviews done, but no System D
+   completion offer on record.
+5. **Missing Final Synthesis** — `completed` note without one.
+6. **Overdue pile-ups** — reviews overdue by more than ~2 weeks.
+7. **scheduled.md orphans** — one-off items whose date passed without action.
+
+Verify each finding against the actual file before presenting it (subagent
+reports are leads, not facts). Then present one consolidated, severity-ranked
+list: "The audit found [N] things that slipped through: [items]." Fixes are
+extraneous friction (no gates) — but each fix is confirmed per item, like all
+spring cleaning (no silent auto-fixes). Record the audit result (clean, or N
+findings + resolutions) in the monthly-review note so a trend builds month to
+month. **Prevention:** if a failure class recurs, tighten the per-review
+completion checklist (skill Part Ten) so it stops happening at the source.
+
+---
+
 ## PART 5 — PROFILE REVIEW AND CALIBRATION SUMMARY
 
 **Load the active profile first** — it does not auto-load outside Discussion Mode (skill Part Seven). If no profile is active, skip the profile-update steps and do only the calibration-trend review.
@@ -459,7 +505,7 @@ cleaning, **nothing is changed without per-item confirmation.**
 Ask: "Have you updated the system since the last monthly meeting — pulled new
 skill files, bumped the version, or changed any templates?" Then establish the
 two versions:
-- **Current version** = the version in `CLAUDE.md`'s title (e.g. `14.2`).
+- **Current version** = the version in `CLAUDE.md`'s title (e.g. `15.0`).
 - **Last-reviewed version** = the `system-version:` recorded in the *previous*
   monthly-review note. If there is none (first time, or never recorded), ask the
   user what version their existing notes were built under.
@@ -531,6 +577,9 @@ applicable this month?" The user must choose one before proceeding.
 
 □ Overdue reviews — all overdue notes surfaced and given a status?
 
+□ Review integrity audit (Part 4B) — reconciliation run both directions;
+  findings resolved or recorded in the monthly note?
+
 □ Schema map updates — at least one walk-through per active domain completed?
   (or explicitly deferred if no new notes exist in that domain)
 
@@ -566,6 +615,9 @@ applicable this month?" The user must choose one before proceeding.
   (keep, schedule, resources, or delete)
 
 □ Overdue reviews — all overdue notes surfaced and given a status?
+
+□ Review integrity audit (Part 4B) — reconciliation run both directions;
+  findings resolved or recorded in the monthly note?
 
 □ Schema map updates — at least one walk-through per active domain completed?
   (or explicitly deferred if no new notes exist in that domain)

@@ -8,7 +8,7 @@ schema is authoritative in `CLAUDE.md → Frontmatter Schema`; this is the body.
 Every concept note **starts `cognitive-state: generative`** — never `completed`
 at creation, no matter how high the teach-back scored. It becomes `completed`
 only later, via System D, after Review 3 (or the early path). See
-`.claude/skills/pkm-principles14.2.md`, Parts Four & Six.
+`.claude/skills/pkm-principles15.0.md`, Parts Four & Six.
 
 ---
 
@@ -19,7 +19,6 @@ only later, via System D, after Review 3 (or the early path). See
 date: YYYY-MM-DD
 last-modified: YYYY-MM-DD
 cognitive-state: generative     # generative | completed (never completed at creation)
-depth: foundational             # foundational | conceptual | integrated
 type: concept
 tags: [review-day1]
 recall-score:                   # most recent review score %

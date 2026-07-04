@@ -712,15 +712,21 @@ dependency — B cannot function without A?"
 
 ---
 
-**Map on paper vs map in the vault:**
+**Two maps in one note — the mind map and the concept map:**
 
-Domain schema maps in 03 - Schemas/ contain a Mermaid mindmap block — a
-simplified depth-encoded overview. Bracket types encode note depth:
-- [Concept] = foundational, (Concept) = conceptual, ((Concept)) = integrated
+Domain schema maps in 03 - Schemas/ carry two Mermaid blocks, because they do
+different jobs:
+- A **mind-map overview** (`mindmap`) — a quick hierarchy: the domain chunked
+  into a few subcategories, like a normal mind map. Just for orientation.
+- A **concept map** (`flowchart`) — the real one: typed-shape nodes and
+  *labeled* relationship arrows ("A —causes→ B", "B —requires→ C"), scoped to a
+  focus question. This is the part the Obsidian graph view can't do — the graph
+  only shows that two notes are linked, never *how*.
 
-The full typed schema map with the arrow system lives on paper. The Mermaid
-is the reference snapshot. Claude transcribes your described structure into
-Mermaid. All schema maps are user-led: Claude transcribes, you construct.
+Both are user-led: you describe the structure and the relationships, Claude
+transcribes them into Mermaid and asks you for each relationship label before
+drawing it. (Earlier versions only drew the hierarchy mind map, which is why it
+felt redundant with the graph view; the labeled concept map is the upgrade.)
 ---
 
 ### Part 6 — Discussion Mode
@@ -778,8 +784,8 @@ discussion doesn't belong to a single subject the way a concept note does.)
 
 03 - Schemas/: Domain schema maps (one per subject), the Cross-Domain Map
 (vault-level structural pattern families), and the Concept Mapping System
-reference file. The full typed schema maps live on paper — these notes contain
-Mermaid depth-encoded overviews plus the text outline.
+reference file. Each domain map holds a Mermaid mind-map overview, a labeled
+Mermaid concept map (flowchart), and the authoritative text outline.
 
 Graph view and why daily notes don't appear:
 The Obsidian graph is designed to show the semantic knowledge network —
@@ -854,8 +860,6 @@ Cover the anatomy of a concept note.
 Frontmatter key fields:
 - cognitive-state (generative/completed): the most important field. Controls
   everything Claude can do with the note.
-- depth (foundational/conceptual/integrated): describes the note's content
-  complexity, not your mastery.
 - type (concept/schema-map/discussion): determines how Claude handles it.
 - The review fields (review-1, review-2, review-3): each has a due date and
   a value that is "uncompleted" until replaced with the actual score.
@@ -1046,8 +1050,42 @@ module**, and there are three ways to run it:
 So this is genuinely optional: the file is a vocabulary, not a switch. Take it,
 replace it, or remove it to taste.
 
+**Adding your own skill files (the `.claude/skills/` folder):**
+The whole `.claude/skills/` folder is Claude's behavioral spec, and it's an
+extension point. At session start Claude reads *every* file in that folder and
+applies it — it does not work from a fixed list of filenames. What that means for
+you:
+- **To add behavior**, drop a new markdown file into `.claude/skills/` (an
+  overlay, a house style, an extra procedure). Claude picks it up next session.
+  You never edit `CLAUDE.md` to point at it.
+- **To remove a feature**, delete its file. Absence is the off switch:
+  no `Schema-Mapping.md` → notationless maps; no `Delegation.md` → no subagents;
+  no `tutorial-mode…md` → no tutorial narration.
+- One nuance: a file is read at startup *unless it says it's read on-demand*. The
+  monthly-meeting skill is the only shipped on-demand file (it loads when the
+  meeting runs), so it doesn't cost you context every session.
+
+**Delegation (`.claude/skills/Delegation.md`):**
+This file is a cost optimization, and it's the newest optional module. Here's how
+it works, step by step:
+1. **What it does.** When your agent can spawn cheaper subagents (e.g. Claude Code
+   running Haiku for a side task), Claude hands *mechanical, heavy* work to them —
+   scanning every note during the monthly audit, applying a batch of identical
+   edits, indexing a very long source — and keeps all the teaching, questioning,
+   and scoring for itself.
+2. **What it never delegates.** Teaching, Socratic dialogue, scoring, profile
+   work, schema transcription, the Final Synthesis, and anything you're supposed
+   to generate yourself. Judgment never leaves the main model.
+3. **You won't see it.** Delegation is silent — no "spinning up a subagent"
+   narration. You just get the result.
+4. **It's safe to ignore.** If your agent can't spawn subagents, the file does
+   nothing and everything runs normally, just using more of the main model.
+5. **To turn it off**, delete `Delegation.md`. Claude then does everything in its
+   own context — identical behavior, higher token cost. To change what's
+   delegated, edit the file's ALWAYS/NEVER lists.
+
 **Tutorial Mode:**
-You're in it now. When you're ready to leave: delete tutorial-mode14.2.md
+You're in it now. When you're ready to leave: delete tutorial-mode15.0.md
 from .claude/skills/. Nothing else changes — Claude just stops narrating its
 mechanics and offering tips. The vault operates identically.
 
@@ -1265,7 +1303,7 @@ free-form as you want.
 ---
 ## DELETING THIS FILE
 
-Delete `tutorial-mode14.2.md` from `.claude/skills/`.
+Delete `tutorial-mode15.0.md` from `.claude/skills/`.
 
 The vault system is identical. Claude stops narrating mechanics, explaining
 procedures, and offering first-encounter tips. Every other behavior remains

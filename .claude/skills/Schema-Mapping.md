@@ -501,22 +501,46 @@ node actually a thing, or is it a process or state dressed as a noun?"
 
 ## SCHEMA MAPS IN THE VAULT
 
-### The Mermaid Overview
+### Two blocks in a vault schema map
 
-Permanent schema map notes in 03 - Schemas/ contain a Mermaid mindmap block
-at the top. This is a simplified depth-encoded overview — not a full typed
-schema map with the relationship system above. It encodes note depth using
-bracket types and provides a quick visual reference.
+Each permanent schema map note in 03 - Schemas/ carries TWO Mermaid blocks,
+because they do different jobs. The full typed system described above finally
+renders in the vault — it is no longer an external-only practice.
 
-Mermaid bracket encoding:
+**1. Mind-map overview** (Mermaid `mindmap`) — a lightweight hierarchy: the
+domain chunked into a few subcategories and sub-subcategories, like a normal
+mind map. Fast to build, good for orientation. Plain nodes; no depth encoding
+(the foundational/conceptual/integrated depth system was retired in 15.0).
 
-* \[Concept] square brackets = foundational depth
-* (Concept) round brackets = conceptual depth
-* ((Concept)) double round = integrated depth or confirmed cross-domain link
-* Plain text = section headers
+**2. Concept map** (Mermaid `flowchart`) — the real schema: typed-shape nodes
+and LABELED relationship edges, scoped to a focus question. This is where the
+arrow system in this file actually appears on the page. In a `flowchart` you can
+draw a labeled edge between any two nodes, and encode node type by shape:
 
-The Mermaid block is built incrementally — one node added per new concept note.
-The text outline below it is the authoritative record. Both stay in sync.
+```
+flowchart TD
+  Stress[/Stress/]
+  Cortisol([High cortisol])
+  HPA((HPA axis))
+  Meditation[/Meditation/]
+  Stress -->|triggers| Cortisol
+  Cortisol -->|is part of| HPA
+  Meditation -->|reduces| Cortisol
+  Evidence -.->|supports| Cortisol
+```
+
+Node shapes: `((Entity))` · `[/Process/]` · `([State])` · `[Principle]` ·
+`{Decision}`. Edge label = the arrow-type vocabulary from this file (causes,
+requires, inhibits, supports, is-a…); add a sub-relationship label when the
+precision matters. Dashed edges (`-.->`) for the epistemic category.
+
+**Why two, not one:** Mermaid's `mindmap` type is hierarchy-only — it *cannot*
+draw labeled cross-links, which is exactly why the old single overview could not
+carry the relationship system. The `flowchart` fixes that. Keep the concept map
+scoped to its focus question so it does not sprawl into unreadable clutter.
+
+Both blocks are built incrementally — one node/edge per new concept note. The
+text outline below them is the authoritative record. All three stay in sync.
 
 ### User-Led Construction
 
@@ -538,7 +562,8 @@ Claude never independently adds nodes to a schema map between sessions.
 ### Domain Schema Map vs. Cross-Domain Map
 
 Domain schema maps (one per subject): knowledge architecture within a single
-domain. Node depth encoded in Mermaid. Text outline below.
+domain. A `mindmap` overview plus a labeled `flowchart` concept map. Text
+outline below is authoritative.
 
 Cross-Domain Map (one for the vault): structural isomorphisms across domain
 schema maps. Pattern families as nodes. Domain instances as connected nodes.
@@ -590,8 +615,10 @@ on — does anything here connect to something in a different section of the map
 Remind the user that node typing is post-construction if they start
 classifying nodes while the map is still forming.
 
-For Mermaid blocks in vault notes: transcribe using depth encoding rather
-than the full relationship notation. The full typed map lives outside the vault.
+For the concept-map (`flowchart`) block in vault notes: transcribe using the
+full relationship notation — typed node shapes and labeled edges from this file.
+For the mind-map (`mindmap`) block: plain hierarchy only. The concept map is no
+longer a stripped-down overview; it carries the real propositions in the vault.
 
 \---
 
