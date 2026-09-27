@@ -1,4 +1,4 @@
-# Maieutic — Vault Instructions for the AI Assistant (15.0)
+# Maieutic — Vault Instructions for the AI Assistant (15.1)
 
 Designed for: Claude Code
 Works with any capable AI coding agent (Codex, Cursor, Copilot, Aider, etc.) —
@@ -200,11 +200,12 @@ YourVault/
                                 (Foundations-Index.md read at startup; the reports
                                 themselves read per-mode, not at startup)
     Transcripts/              — Exemplary teacher transcripts
-    skills/
-      pkm-principles15.0.md
-      Schema-Mapping.md      — Schema mapping notation system (replaceable; delete → notationless)
-      monthly-meeting-skill15.0.md
-      tutorial-mode15.0.md       — DELETE this file to disable tutorial narration
+    skills/                   — The behavioral spec. EVERY file in this folder is
+                                read at startup (except any that declares itself
+                                read-on-demand). Deliberately not listed by name:
+                                the folder is the extension point — drop a file in
+                                to add behavior, delete one to remove its feature.
+                                See Session Startup step 1.
     GOALS.md                  — Long-term learning goals and objectives
   .note-information/          — All external metadata for notes (hidden)
     Scratch/                  — Scratch notes after session ends
@@ -226,12 +227,18 @@ YourVault/
   02 - Notes/                 — All permanent knowledge notes
     [Subject]/
       [Unit or topic]/
+    Discussions/              — All discussion notes, regardless of subject
   03 - Schemas/               — Schema maps, cross-domain map, schema notation
-    Concept Mapping System.md  — Original in-vault reference (human-readable)
-    [Subject] Schema Map.md    — Domain schema maps (one per subject)
-    Cross-Domain Map.md        — Cross-domain structural pattern families
+    Concept Mapping System.md — Original in-vault reference (human-readable)
+    [Subject] Schema Map.md   — Domain schema maps (one per subject)
+    Cross-Domain Map.md       — Cross-domain structural isomorphism map
+  Templates/                  — Note, scratch, discussion & tracker templates; do not modify
+  CLAUDE.md                   — This file (vault root)
+  CHANGELOG.md                — Versioned change log; drives the monthly Update Check
+```
 
-OBSIDIAN GRAPH VIEW SETUP (one-time user action):
+### Obsidian graph view setup (one-time user action)
+
 The graph should show only your concept notes in 02 - Notes/ — the semantic
 knowledge network. Journal, inbox, templates, resources, schema maps, discussion
 notes, and the root config/doc files are not part of that network and appear as
@@ -252,12 +259,6 @@ temporal co-occurrence. Natural Selection and Thermodynamics would appear
 adjacent in the graph simply because both were studied on the same day. The
 cluster structure that makes the graph useful — groups of semantically related
 ideas forming natural bulbs — would dissolve into noise.
-    [Subject] Schema Map.md   — One per subject domain
-    Cross-Domain Map.md       — Cross-domain structural isomorphism map
-  Templates/                  — Note, scratch, discussion & tracker templates; do not modify
-  CLAUDE.md                   — This file (vault root)
-  CHANGELOG.md                — Versioned change log; drives the monthly Update Check
-```
 
 **Note folder rule:** All permanent knowledge notes live in
 `02 - Notes/[Subject]/[Unit]/`. Ask before creating new subject folders.
@@ -295,34 +296,39 @@ recall-score:                   # most recent review score %; auto-updated
 initial-score:                  # teach-back/Day 0 score % (set once at creation)
 initial-estimate:               # pre-handoff confidence estimate %
 session-source:                 # path to scratch note in .note-information/Scratch/
-session-difficulty:
-session-fluency:
-session-understanding:
 # links-to removed 8.1 — Connections section is authoritative
 analogy-gate-complete: false
 completion-path:                # standard | early — set when completed
 completed-date:                 # date cognitive-state moved to completed
 
-review-1-due: YYYY-MM-DD
+review-1-due: YYYY-MM-DD        # the only due date filled in at creation
 review-1-estimate:
 review-1: uncompleted
 
-review-2-due: YYYY-MM-DD
+review-2-due:                   # EMPTY at creation — set when Review 1 completes (+6)
 review-2-estimate:
 review-2: uncompleted
-review-2-mode: standard      # standard | elaborative      # standard | elaborative
+review-2-mode: standard         # standard | elaborative
 
-review-3-due: YYYY-MM-DD
+review-3-due:                   # EMPTY at creation — set when Review 2 completes (+14)
 review-3-estimate:
 review-3: uncompleted
 review-3-mode: standard
 ---
 ```
 
+**All three review blocks are written at creation; only Review 1's due date is
+filled in.** The slots must exist before anything can be written into them, so
+their absence is not the rule — their *emptiness* is. `review-2-due` is set when
+Review 1 completes, `review-3-due` when Review 2 completes (Model 2). This is
+separate from, and additional to, the review-tracker prohibition below: the
+tracker gets no R2/R3 entry at creation either.
+
 Self-report fields removed in 7.1: `session-difficulty`, `session-fluency`,
-`session-understanding`, and `u-rating` are no longer used. Notes that have
-them can have those fields deleted. Objective calibration signals (score trends,
-calibration gaps, pattern detection) replace them entirely.
+`session-understanding`, and `u-rating` are no longer written. They are gone from
+the schema above; notes created before 7.1 may still carry them and can have those
+fields deleted whenever the note is next touched. Objective calibration signals
+(score trends, calibration gaps, pattern detection) replace them entirely.
 
 [Keyword] type in note-facts.md:
 Vocabulary terms the user should produce — not just understand.
@@ -337,10 +343,14 @@ Each concept note contains a [!quote] callout placed immediately after
 the closing --- of the frontmatter, before the Connections section:
 
   > [!quote] What this note covers
-  > [1-2 sentences: core claim/mechanism — scope identifier, not content summary]
-  > [Optional: what this note explicitly does NOT cover]
+  > [The questions this note's synthesis should answer — 1-3 of them, phrased as questions]
+  > [Optional: what this note explicitly does NOT cover — a statement, not a question]
 
-Written by Claude at end of scope agreement (before teach-back).
+Written by Claude at end of scope agreement (before teach-back). **Questions, not
+the claim.** The callout is shown automatically before the R2 and R3 confidence
+estimates, so a description that states the claim hands over a compressed answer
+immediately before asking the user to retrieve it. Full rule and examples: skill
+→ DESCRIPTION FORMAT.
 - R1: shown on-request only
 - R2 and R3: shown automatically before the confidence estimate
 
@@ -354,8 +364,11 @@ shipped Profile-1 carries a schema-keyword pretest instruction here.
 
 Back-link placeholder format: When note B connects to note A, Claude
 silently adds to note A's Connections section:
-`- [[Note B]] — back-link added YYYY-MM-DD, description pending monthly meeting`
-This is replaced at the monthly meeting when the user writes the description.
+`- [[Note B]] — back-link added YYYY-MM-DD, description pending next review`
+The description is written at note A's **next review**, at the end of that session
+after scoring and re-consolidation (skill Part Four step 6b). Never scheduled by
+date, never batched into a meeting. Notes created before 15.1 carry the older
+`description pending monthly meeting` wording — treat it identically.
 
 Backward compatibility: Notes created before 6.0 may have an `expertise` field,
 and notes created before 15.0 may have a `depth` field. Both are legacy data.
@@ -438,7 +451,7 @@ profile's Persistent Memory does.
 
 **type: monthly-review**
 Lives in `01 - Journal/Monthly/`. Full reflection plus spring cleaning log.
-Created during the monthly meeting. Full procedure in monthly-meeting-skill15.0.md.
+Created during the monthly meeting. Full procedure in monthly-meeting-skill15.1.md.
 
 ---
 

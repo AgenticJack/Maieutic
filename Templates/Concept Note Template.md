@@ -8,7 +8,7 @@ schema is authoritative in `CLAUDE.md → Frontmatter Schema`; this is the body.
 Every concept note **starts `cognitive-state: generative`** — never `completed`
 at creation, no matter how high the teach-back scored. It becomes `completed`
 only later, via System D, after Review 3 (or the early path). See
-`.claude/skills/pkm-principles15.0.md`, Parts Four & Six.
+`.claude/skills/pkm-principles15.1.md`, Parts Four & Six.
 
 ---
 
@@ -29,20 +29,33 @@ analogy-gate-complete: false
 completion-path:                # standard | early — set when completed
 completed-date:                 # set when cognitive-state moves to completed
 
-review-1-due: YYYY-MM-DD
+review-1-due: YYYY-MM-DD        # the only due date filled in at creation
 review-1-estimate:
 review-1: uncompleted
-# Review 2 / Review 3 fields are added only as each prior review completes —
-# never pre-populated at creation.
+
+review-2-due:                   # EMPTY at creation — set when Review 1 completes (+6)
+review-2-estimate:
+review-2: uncompleted
+review-2-mode: standard         # standard | elaborative
+
+review-3-due:                   # EMPTY at creation — set when Review 2 completes (+14)
+review-3-estimate:
+review-3: uncompleted
+review-3-mode: standard
 ---
 ```
+
+**All three review blocks exist from creation — only Review 1's due date is filled
+in.** The slots have to be there before anything can go into them; what must not be
+pre-populated is the *dates* (and the review-tracker entries). `review-2-due` is set
+when Review 1 completes, `review-3-due` when Review 2 completes.
 
 ## Body
 
 ```
 > [!quote] What this note covers
-> [1–2 sentences: core claim/mechanism — a scope identifier, not a summary]
-> [Optional: what this note explicitly does NOT cover]
+> [The questions this note's synthesis should answer — 1–3, phrased as questions]
+> [Optional: what this note explicitly does NOT cover — a statement, not a question]
 
 ## [CONCEPT NAME]
 
@@ -93,7 +106,7 @@ Built from: [Claude / user / Review 3]. Audited to 100% of atomic facts + all vo
 > [!CALLOUT] Evaluation — [DATE]
 
 > [!abstract] Re-consolidation note — [DATE]
-> [a Step A re-teach that closed a recurring gap: one paragraph covering the gap,
+> [written only when a re-consolidation closed a recurring gap: one paragraph covering the gap,
 > how the user closed it, and the protocol note (e.g. the recorded score stands).
 > One callout only — no duplicate paragraph above it.]
 ```

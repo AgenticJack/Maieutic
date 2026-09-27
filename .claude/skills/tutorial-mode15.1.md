@@ -88,11 +88,12 @@ After reporting a gap, explain it:
 direct signal about calibration — whether your sense of mastery matches
 what you can actually retrieve."
 
-**Re-consolidation trigger (Step A):**
-Before running the mini-pipeline:
-"Your score fell below the threshold [or: this area has been weak across
-multiple reviews]. Running a focused re-teaching on the weak areas only —
-not the whole concept. This adds a re-consolidation layer to the note."
+**Re-consolidation (runs after every score, not just low ones):**
+Frame what it is, and especially what it is not:
+"Now the re-consolidation. This isn't a penalty for the score — it runs after
+every teach-back and every review, at every score. I won't tell you what you
+missed; I'll ask my way toward it, so you're still the one retrieving, just
+with some help. Your score is already recorded and nothing here changes it."
 
 **Discussion Mode opening:**
 "Discussion Mode — no correct answer I'm guiding toward. I'll take
@@ -199,11 +200,11 @@ check, not a planning session. The monthly meeting is where the deeper
 review and planning happen."
 
 **First monthly meeting:**
-"Six parts: reflection on how the month went, schema work and cross-domain
-brainstorming, writing descriptions for the month's pending back-links,
-spring cleaning of the vault, a profile review, and a system update check
-(migrating older notes if you've updated Maieutic). Nothing is deleted
-without you confirming each item individually."
+"Five parts: reflection on how the month went, schema work and cross-domain
+brainstorming, spring cleaning of the vault (with an integrity audit that
+reconciles every note against the trackers), a profile review, and a system
+update check (migrating older notes if you've updated Maieutic). Nothing is
+deleted without you confirming each item individually."
 
 **First stale note:**
 "A note goes stale when its review window expires — the gap has grown long
@@ -421,9 +422,17 @@ Then:
   note-facts.md, a backend file you never see; it's what lets the system spot
   a pattern weakness (the same fact missed across multiple reviews) without
   ever showing you the underlying fact list.
-- Three-step post-scoring flow: re-consolidation if below 60% or pattern
-  weakness; calibration reflection if estimate was off by 20+ points;
-  discussion reflection always.
+- The post-scoring flow, in order: your score is recorded first and **stands** —
+  nothing after this can change it, which is what keeps the number meaning
+  unaided recall. Then a calibration reflection, but only if your estimate was
+  off by 20+ points in either direction. Then **re-consolidation, always.**
+  Then any back-link descriptions the note has pending.
+- Re-consolidation is the part worth understanding. It runs after every score,
+  high or low, and it is deliberately not remediation. Claude does not tell you
+  what you missed — it asks its way there, so you are still retrieving, just
+  with scaffolding. If a gap is total it drops to something simpler you do have
+  and builds back up. On a strong score it pushes on edges and boundaries
+  instead of gaps. You can decline any individual one.
 
 Phase 4-6 — Note creation, calibration, Analogy Gate:
 - Naming the note is always an explicit ask. Claude offers a suggested name
@@ -449,7 +458,9 @@ Cover:
   from Review 1 completion), Review 3 (+14 days from Review 2 completion).
   Calculated from actual completion — not from creation date.
 - The review sequence: confidence estimate first (always), synthesis from
-  memory, score against atomic facts, post-review flow (A/B/C).
+  memory, score against atomic facts, then the post-scoring flow: a calibration
+  reflection if the estimate was off by 20+ points either way, re-consolidation
+  (always), and any back-link descriptions that note has pending.
 - Staleness: if a review window expires, the note goes silent. Surfaces at
   the monthly meeting for a decision (relearn, schedule, or archive).
 - Completion threshold (System D): standard path is Day 21 score 80%+ with
@@ -758,6 +769,15 @@ Cover:
 - Discussion notes: type: discussion. No atomic facts. No review schedule.
   Stays generative indefinitely. Records: the question, positions and
   reasoning, what shifted, what remains open.
+- The route into a concept note: because a discussion note has no review
+  schedule, an idea you built here would never enter spaced retrieval on its
+  own. So when a discussion produces a claim or mechanism that has actually
+  settled — as opposed to a question still being worked — Claude offers to run
+  the normal note-creation procedure on it, with the discussion as the source.
+  You get scope agreement, a teach-back, and a normal review schedule. Not
+  automatic and not every time; a live question should stay a live question.
+  Both notes persist and link to each other: the discussion records *how the
+  idea got built*, the concept note is the part that gets *retained*.
 - Profiles shape discussion — see Part 9 for profiles.
 
 ---
@@ -862,7 +882,11 @@ Frontmatter key fields:
   everything Claude can do with the note.
 - type (concept/schema-map/discussion): determines how Claude handles it.
 - The review fields (review-1, review-2, review-3): each has a due date and
-  a value that is "uncompleted" until replaced with the actual score.
+  a value that is "uncompleted" until replaced with the actual score. All three
+  blocks are there from the moment the note is created, but only Review 1's due
+  date is filled in — Review 2's and Review 3's stay empty until the prior
+  review actually completes, because the intervals count from completion, not
+  from creation.
 
 Synthesis section (bottom of the note, after Connections):
 - Layered record of every retrieval event, in strict time order — oldest at the
@@ -880,13 +904,20 @@ The callout colors are a code — you can read a note's health at a glance:
 - **Green `[!success]` is reserved for the Final Synthesis** — the one green block,
   the note's apex, written only at completion. Under it, a dark-blue `[!todo]`
   "Audit additions" callout lists anything Claude added to reach 100%.
-- A cyan `[!abstract]` "Re-consolidation note" marks a gap you closed in a
-  targeted re-teach.
+- A cyan `[!abstract]` "Re-consolidation note" marks a gap you closed. Only the
+  ones that closed a genuine recurring gap get written down — routine
+  re-consolidation on a healthy score leaves no entry, or every note would fill
+  up with a record of the normal case.
 - **Purple `[!example]` is the general AI voice** — Leads, AI-written Applications,
   and the AI assessment on discussion notes (purple, to echo the color of
   wikilinks). It's the default for any AI content without a more specific color.
-- A gray `[!quote]` callout at the top of a note is its **description** — the
-  "what this note covers" orientation blurb.
+- A gray `[!quote]` callout at the top of a note is its **description** — and it
+  is written as *questions*, not as a summary: the questions your synthesis
+  should be able to answer. That matters because the callout is shown to you
+  automatically right before the Review 2 and Review 3 confidence estimates. A
+  description that stated the claim would be handing you the answer a moment
+  before asking you to retrieve it. The "does not cover" line underneath stays a
+  plain statement, since a boundary isn't something you're being asked to recall.
 - Every one of these is a built-in Obsidian callout, so the colors and icons just
   work the moment you open the vault — nothing to install.
 - The rule behind all of it: **a callout always means Claude wrote it.** Your own
@@ -915,8 +946,11 @@ Leads section (between Connections and Applications):
   note's name (the name gets decided fresh, with you, whenever that note
   actually gets created). A lead only becomes a real wikilink once you've
   actually pursued it and the resulting note exists.
-- Leads accumulate as silent metadata until the monthly meeting, where stale
-  ones get swept — pursue, keep, or drop, one at a time.
+- Leads accumulate as silent metadata and get surfaced at the monthly meeting.
+  **They are never deleted** — the only question asked is whether you want to
+  pursue one; everything else simply stays. An unpursued lead costs a single
+  line and records a direction the material could go, so deleting it would trade
+  a map of the unexplored edge for tidiness.
 
 Connections section:
 - User proposes connections first (in-vault and out-of-vault).
@@ -925,14 +959,22 @@ Connections section:
 - Missed in-vault connections: Claude probes Socratically (three levels)
   before naming any note.
 - Back-links: when Note B connects to Note A, Claude silently adds a placeholder
-  to Note A's Connections. At the monthly meeting you write the description
-  from Note A's perspective. This deferral is deliberate — it's the system's
-  spaced retrieval *for connections*, not for content. Note content gets
-  spaced retrieval through the review schedule; the relationships between
-  notes get theirs here. Reconstructing weeks later why two notes connect,
-  from the other note's side, is a genuine retrieval event for relational
-  knowledge — writing the description right when the connection is made
-  would have almost no retrieval value, since nothing has been forgotten yet.
+  to Note A's Connections. You write that description at **Note A's next review**,
+  at the end of that session, once the scoring and re-consolidation are done.
+  Two things are going on here, and they are worth separating.
+  First, *why it's deferred at all*: it's the system's spaced retrieval **for
+  connections**, not for content. Note content gets spaced retrieval through the
+  review schedule; the relationships between notes get theirs here. Reconstructing
+  weeks later why two notes connect, from the other note's side, is a genuine
+  retrieval event for relational knowledge — writing it the moment the connection
+  is made has almost no retrieval value, since nothing has been forgotten yet.
+  Second, *why it rides the review rather than a calendar date*: a back-link
+  description on its own is a chore with no natural home, and chores with no home
+  don't get done. Attached to a review, the note is already open, the material is
+  already loaded, and you have just been retrieving — so it costs almost nothing
+  and you are in exactly the right state to do it well. It also self-limits: a
+  note with reviews left gets its descriptions written; a note with none is
+  completed, which means its connections are already settled.
 
 The verbatim rule vs. connection formalization:
 - Synthesis: exact words preserved. Your words, not Claude's paraphrase.
@@ -1085,7 +1127,7 @@ it works, step by step:
    delegated, edit the file's ALWAYS/NEVER lists.
 
 **Tutorial Mode:**
-You're in it now. When you're ready to leave: delete tutorial-mode15.0.md
+You're in it now. When you're ready to leave: delete tutorial-mode15.1.md
 from .claude/skills/. Nothing else changes — Claude just stops narrating its
 mechanics and offering tips. The vault operates identically.
 
@@ -1103,7 +1145,7 @@ Creates a weekly-review note. Brief. Not annoying.
 
 **Monthly meeting:**
 Prompted around the 28th. Named after the month being reviewed.
-Six parts:
+Five parts:
 
 Part 1 — Reflection: genuine conversation about the month. Stats (notes
 created, reviews completed, average scores, calibration trends). How you feel
@@ -1114,25 +1156,24 @@ Claude transcribes updates), create missing schema maps for domains that lack
 them, and collaborative cross-domain brainstorming (you judge whether structural
 isomorphisms are genuine — Claude proposes, you decide).
 
-Part 3 — Back-link descriptions: write the descriptions for every pending
-back-link from the month — the "description pending monthly meeting"
-placeholders sitting in your notes' Connections sections. This is deliberately
-its own part, not a footnote to schema work: it's the system's spaced retrieval
-for the *connections* between notes, the counterpart to how reviews handle
-spaced retrieval for note *content*. Expect real volume here — every
-connection made since the last meeting has a pending placeholder waiting.
-
-Part 4 — Spring cleaning: scratch folder, inbox items older than 30 days,
+Part 3 — Spring cleaning: scratch folder, inbox items older than 30 days,
 overdue reviews, unused notes, stale notes, and open leads. Never deletes
 anything without explicit per-item confirmation. Goes category by category.
+(Leads are the exception to "per-item": they are only ever surfaced, never
+dropped, so that category moves fast.)
 
-Part 5 — Profile review: load the active profile (it doesn't auto-load
+Part 3B — Review integrity audit: every note is reconciled against the trackers
+in both directions, so nothing has silently fallen out of the system — orphaned
+notes, ghost tracker entries, broken review chains, stalled notes. Also runnable
+any time on request ("audit my vault").
+
+Part 4 — Profile review: load the active profile (it doesn't auto-load
 outside Discussion Mode, so this is one of the few places it's loaded
 deliberately), then a calibration trend summary (consistent overestimation
 pattern this month?), notable intellectual evolution, and any open discussion
 questions worth revisiting.
 
-Part 6 — System update check: if you've updated Maieutic since last month (new
+Part 5 — System update check: if you've updated Maieutic since last month (new
 skill version, pulled files), your *already-created* notes still use the old
 format. Claude compares the version recorded in last month's note to the current
 one, reads CHANGELOG.md for what changed, and offers to migrate your existing
@@ -1303,7 +1344,7 @@ free-form as you want.
 ---
 ## DELETING THIS FILE
 
-Delete `tutorial-mode15.0.md` from `.claude/skills/`.
+Delete `tutorial-mode15.1.md` from `.claude/skills/`.
 
 The vault system is identical. Claude stops narrating mechanics, explaining
 procedures, and offering first-encounter tips. Every other behavior remains

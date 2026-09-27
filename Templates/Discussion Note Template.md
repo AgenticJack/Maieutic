@@ -4,6 +4,14 @@ Created at the end of a Discussion Mode session (after the SYNTHESIS state). Liv
 `02 - Notes/Discussions/` (`type: discussion`). Unlike concept notes: no atomic facts,
 no review schedule, no teach-back — it can stay `generative` indefinitely.
 
+**The concept-note route.** If the discussion produced a claim or mechanism stable
+enough to be taught back — as opposed to a live question still being worked — the AI
+offers, after CAPTURE, to run the standard Note Creation Procedure with this note as
+the `session-source`. That concept note gets atomic facts, a teach-back and a normal
+review schedule; this note stays exactly as it is. The discussion note records *how
+the idea was built*; the concept note is what gets *retained*. Both persist and link
+to each other.
+
 **Frontmatter is YAML — keep it to clean, queryable scalars.** Do NOT put free prose
 (colons, quotes, parentheses, brackets, `#`, em-dashes, semicolons) into frontmatter
 fields, and never into inline `[...]` lists — that is what makes a third of these notes

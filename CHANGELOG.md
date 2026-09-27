@@ -14,6 +14,94 @@ between. If this file is missing or behind, the AI can fetch the canonical copy:
 
 ---
 
+## 15.1
+
+- **Re-consolidation is now standard, and is retrieved rather than told.** It runs
+  after **every** teach-back and **every** review, at every score — it is no longer
+  a sub-60% remediation step, and must never be framed as one. It is a hybrid of
+  Discussion Mode and Socratic tutoring: the AI does not state what was missed, it
+  pulls it Socratically, dropping to a simpler component and building back up where
+  a gap is total. On a strong score it pushes on edges, boundaries and connections
+  instead. **The score is recorded before it begins and stands** — otherwise the
+  trend line would measure post-help recall. The old Steps A/B/C are replaced by a
+  single canonical Post-Scoring Flow (calibration reflection if the gap is ≥20 pts
+  either way → re-consolidation, always → any pending back-link descriptions).
+  *Existing notes:* nothing to change. Re-consolidation entries are now written only
+  when one closed a genuine recurring gap, not for routine ones.
+- **[migration] Back-link descriptions ride the next review instead of a date.** The
+  monthly meeting's Part 3 is deleted. When a review runs on a note that carries
+  pending back-link placeholders, those descriptions are written at the end of that
+  session, after scoring and re-consolidation. Never scheduled by date, never batched.
+  Both dated venues had already failed in practice: the monthly batch accumulated 52
+  pending descriptions across 26 notes, and a weekly-batch trial went zero-for-seven —
+  the problem was never the interval, it was that a standalone chore has no natural
+  home. *Existing notes:* the placeholder wording changes from `description pending
+  monthly meeting` to `description pending next review`; the old wording is still
+  recognized and treated identically, so retyping is optional. Existing pending
+  descriptions simply follow the new rule — each gets written the next time its note
+  is reviewed. A completed note with no future reviews keeps its placeholders until a
+  manual review or Analogy Gate carries them; the monthly integrity audit surfaces
+  those as "stranded placeholders" rather than forcing them.
+- **[migration] Note descriptions are phrased as questions.** The `[!quote]` callout
+  now states *the questions the synthesis should answer*, not the claim itself. The
+  callout is shown automatically before the Review 2 and Review 3 confidence
+  estimates, so a description that stated the claim was handing over a compressed
+  answer immediately before asking for retrieval. The "does not cover" boundary line
+  stays a statement. *Existing notes:* rephrase the description callout as questions
+  whenever a note is next touched (harmless if left).
+- **Shorter responses, more turns.** Default to short turns and many of them — one
+  400-word response should have been three 120-word exchanges. Quality and rigor are
+  unchanged; depth arrives across turns rather than inside one. This is now Critical
+  Rule #7, with the canonical spec in skill Part Ten. Two reasons: it restores the
+  conversational dynamic both Path A and Discussion Mode depend on (engage every 3–4
+  sentences), and a response that takes over a minute to generate is dead time in
+  which attention is lost. Full-length output remains correct for the mandatory
+  scoring block, the Final Synthesis, monthly-meeting stats, and anything the user
+  asks to see laid out in full.
+- **Leads are never deleted.** The monthly meeting's Open Leads category loses its
+  "drop" option — leads are pursued or kept, nothing else. A lead costs one line and
+  records a direction the material could go; deleting it trades a map of the
+  unexplored edge for tidiness. Practical effect: that category becomes a read-only
+  surfacing rather than a per-item grind, and only "pursue" answers generate actions.
+- **A discussion-note → concept-note route.** After CAPTURE, the AI offers to run the
+  standard Note Creation Procedure on a discussion, with the discussion note as the
+  session source — so an idea built and sharpened in Discussion Mode can enter spaced
+  retrieval instead of sitting outside it forever. Not automatic and not every time:
+  the trigger is a claim or mechanism stable enough to be taught back, as opposed to
+  a live question still being worked. Both notes persist and link to each other.
+- **Naming rule for pre-planned series.** A topic deliberately planned in advance as a
+  multi-note series names every note `[Series] - [Specific Topic] Part N`, so the set
+  sorts and reads together. Planned series only — never retrofitted onto notes that
+  merely turned out to be related.
+- **[migration] Frontmatter: Review 2 / Review 3 due dates are explicitly empty at
+  creation.** The three review blocks have always been written at creation — the slots
+  must exist before anything can go into them — but the schema showed `YYYY-MM-DD`
+  placeholders on all three due dates, which reads as an instruction to fill in a date
+  at exactly the moment you must not. `review-2-due` and `review-3-due` are now shown
+  empty, with the rule stated in place. *Existing notes:* if a note has a date in
+  `review-2-due` or `review-3-due` whose prior review has not completed, clear it.
+- **Monthly meeting renumbered to five parts.** With Part 3 (back-link descriptions)
+  removed: 1 Reflection · 2 Schema work · 3 Spring cleaning · 3B Review integrity audit
+  · 4 Profile review · 5 System update check. Earlier changelog entries referring to
+  "Part 4B" (the integrity audit) and "Part 6" (the update check) mean 3B and 5 as of
+  this version. The monthly-review note drops its `backlink-descriptions` field; the
+  integrity audit gains a "stranded back-link placeholders" finding class.
+- **Fixes.** The monthly-meeting skill's End-of-Meeting checklist and Closing section
+  were duplicated by a bad paste that also corrupted the line it landed on ("After all
+  parts:" run together with a heading); the stale second copy is deleted. `CLAUDE.md`
+  no longer hardcodes a list of skill filenames in the vault-structure tree — 15.0 made
+  the folder itself the extension point, and the list had already drifted out of date;
+  the tree also had the graph-view prose spliced inside its code fence with the schema
+  entries repeated afterwards, now separated, and gains the `Discussions/` folder it
+  was missing. Retired 7.1 self-report fields (`session-difficulty`, `session-fluency`,
+  `session-understanding`) are gone from the frontmatter schema block that still listed
+  them. `Schema-Mapping.md` had 35 escaped `\---` separators rendering as literal text.
+  Monthly-meeting Step 2a numbered its steps 1–6 and then started a second "4."; one
+  inbox option pointed at `.resources/` instead of `resources/`. Skill files renamed
+  `…15.0.md` → `…15.1.md`.
+
+---
+
 ## 15.0
 
 - **[migration] The `depth` field is retired.** The foundational / conceptual /

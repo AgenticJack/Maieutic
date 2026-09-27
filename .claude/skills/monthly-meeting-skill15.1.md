@@ -1,4 +1,4 @@
-# Monthly Meeting Skill (15.0)
+# Monthly Meeting Skill (15.1)
 ## Full Procedure for the Monthly Learning Review and Spring Cleaning
 
 ---
@@ -9,16 +9,22 @@ This file contains the complete monthly meeting procedure. It is read by
 Claude only when a monthly meeting is triggered — not at every session start.
 The main skill file contains a brief summary pointing here.
 
-The monthly meeting has six parts:
+The monthly meeting has five parts:
 Part 1 — Reflection: a genuine conversation about the month
 Part 2 — Schema work: review, update, and cross-domain brainstorming
-Part 3 — Back-link descriptions: spaced retrieval for the connections between notes
-Part 4 — Spring cleaning: vault maintenance with user confirmation on everything
-Part 5 — Profile review and calibration summary
-Part 6 — System update check: migrate already-created notes to the current version
+Part 3 — Spring cleaning: vault maintenance with user confirmation on everything
+Part 3B — Review integrity audit: reconcile every note against the trackers
+Part 4 — Profile review and calibration summary
+Part 5 — System update check: migrate already-created notes to the current version
 
 A monthly-review note is created at the start and filled in as the meeting
 progresses. Nothing is deleted without explicit per-item user confirmation.
+
+**Back-link descriptions are no longer part of this meeting.** Through 15.0 they
+were Part 3, batched here once a month. As of 15.1 each one is written at the end
+of that note's next review session, after scoring and re-consolidation
+(`pkm-principles` Part Four step 6b). Do not batch them here, and do not schedule
+them by date — both of those were tried and both failed.
 
 ---
 
@@ -61,9 +67,8 @@ reviews-overdue: [fill in]
 average-score: [fill in]
 average-calibration-gap: [fill in]
 schema-maps-updated: [fill in]
-backlink-descriptions: [done / scheduled — fill in during Part 3]
-spring-cleaning-actions: [fill in during Part 4]
-system-version: [current system version, e.g. 15.0 — set during Part 6; next month's update check reads this]
+spring-cleaning-actions: [fill in during Part 3]
+system-version: [current system version, e.g. 15.1 — set during Part 5; next month's update check reads this]
 ---
 
 ## [Month Year] Monthly Review
@@ -148,7 +153,7 @@ changed.] Does this look right? Anything missing or misrepresented?"
 
 Wait for their input before finalizing each map.
 
-4. Update the domain expertise rating based on:
+7. Update the domain expertise rating based on:
    - Average review scores for notes in this domain
    - Schema map coverage compared to the expert reference
    - The user's own assessment
@@ -242,44 +247,7 @@ Record a summary of the cross-domain brainstorming session in the monthly-review
 
 ---
 
-## PART 3 — BACK-LINK DESCRIPTIONS
-
-This is the system's **spaced retrieval for connections.** Note *content* is
-retrieved through scheduled reviews; the *relationships between notes* are
-retrieved here. Reconstructing — weeks later — why two notes connect, from the
-other note's perspective, is a genuine retrieval event for relational knowledge
-(parallel to a review's propositional retrieval), and often surfaces asymmetric
-aspects the original description missed. That is why the description is deferred
-to the monthly meeting rather than written at note creation, where the
-connection was just made and retrieval value is near zero. Expect volume —
-every connection made since the last meeting has a pending placeholder.
-
-Scan all notes in `02 - Notes/` for Connections sections containing
-`description pending monthly meeting` placeholders. **Surface the full count
-first** ("there are [N] pending back-link descriptions this month"), then work
-through them.
-
-**Volume handling:** if there are many (≳8), prioritize oldest placeholder
-first, then most-connected notes (hubs matter most). Offer to split: "Want all
-[N] now, or the top [k] and I'll schedule the rest for a mid-month session?"
-Each one is a retrieval event — don't rush them — but the load may legitimately
-be split.
-
-For each pending placeholder:
-"[[Note A]] has a back-link to [[Note B]] that needs a description written
-from Note A's perspective. Note B connects to Note A because [brief context
-from when the connection was made]. From Note A's angle — how would you
-characterize what connects these two? What does Note A contribute to or
-gain from Note B?"
-
-User writes the description in their own words; Claude formalizes the wording
-for clarity and replaces the placeholder. **No "keep or skip"** — either write
-the description now or schedule it (in `scheduled.md`) for a specific date
-before next month. Record the done / scheduled counts in the monthly-review note.
-
----
-
-## PART 4 — SPRING CLEANING
+## PART 3 — SPRING CLEANING
 
 Work through each category below in order. For each item, ask before acting.
 Never delete, archive, or move anything without explicit confirmation on that
@@ -347,7 +315,7 @@ Identify items that have been in the inbox for more than 30 days:
 For each one, here are your options:
   a) Keep — come back to it
   b) Schedule a learning session on this topic
-  c) Move to .resources/
+  c) Move to resources/
   d) Delete"
 
 Go through them one at a time. The user decides the fate of each.
@@ -386,17 +354,23 @@ Again: one at a time, individual confirmation.
 Sweep the Leads sections of notes touched this month (and any older notes the
 user names). A lead is open if it has no resolving [[wikilink]] to a note yet.
 
-"These leads are still open: [list — lead text + source note]. For each one:
-pursue it (queue a learning session), keep it (still relevant, not yet), or
-drop it (no longer interesting)?"
+**Leads are never deleted.** There is no drop option. An unpursued lead costs one
+line and records a direction the material could go; deleting it destroys a map of
+the unexplored edge in exchange for tidiness. That makes this category a
+**read-only surfacing** rather than a per-item grind: present what is open, and
+only the *pursue* answers generate any action.
 
-- Pursue: add to scheduled.md as a planned learning session, or queue it as
+"Here's what's still open: [list — lead text + source note]. Anything here you
+want to pursue? Everything else just stays where it is."
+
+- **Pursue:** add to scheduled.md as a planned learning session, or queue it as
   the next-session suggestion under the relevant goal.
-- Keep: leave in place — open leads are the trail of where learning can go next.
-- Drop: delete the lead line from the note's Leads section.
+- **Keep (the default, and the answer for most):** leave it exactly as it is. No
+  confirmation needed, no follow-up question.
 
-One at a time, individual confirmation. Leads that resolved into notes this
-month need no action — confirm the wikilink resolution happened and move on.
+Move through the list at pace — this is not a decision point for every line.
+Leads that resolved into notes this month need no action; confirm the wikilink
+resolution happened and move on.
 
 ### Category 6 — Anything Else
 
@@ -408,7 +382,7 @@ Let the user direct this part entirely.
 
 ---
 
-## PART 4B — REVIEW INTEGRITY AUDIT (nothing falls through silently)
+## PART 3B — REVIEW INTEGRITY AUDIT (nothing falls through silently)
 
 Spring cleaning works from the trackers; this part verifies the trackers
 themselves. Every note in `02 - Notes/` is checked against `review-tracker.md`
@@ -439,6 +413,12 @@ one-way pass misses half the failures. Flag these classes, most-severe first:
 5. **Missing Final Synthesis** — `completed` note without one.
 6. **Overdue pile-ups** — reviews overdue by more than ~2 weeks.
 7. **scheduled.md orphans** — one-off items whose date passed without action.
+8. **Stranded back-link placeholders** — a `description pending` placeholder on a
+   note with no future review to carry it (completed, or all reviews done). These
+   are the only back-links that need surfacing at all; every other pending one
+   will be written at its note's next review. Offer to write them here, or to let
+   them ride along with a manual review or Analogy Gate. Low-stakes — do not force
+   them, and do not schedule them.
 
 Verify each finding against the actual file before presenting it (subagent
 reports are leads, not facts). Then present one consolidated, severity-ranked
@@ -451,7 +431,7 @@ completion checklist (skill Part Ten) so it stops happening at the source.
 
 ---
 
-## PART 5 — PROFILE REVIEW AND CALIBRATION SUMMARY
+## PART 4 — PROFILE REVIEW AND CALIBRATION SUMMARY
 
 **Load the active profile first** — it does not auto-load outside Discussion Mode (skill Part Seven). If no profile is active, skip the profile-update steps and do only the calibration-trend review.
 
@@ -492,7 +472,7 @@ or close it as explored-but-unresolved?"
 
 ---
 
-## PART 6 — SYSTEM UPDATE CHECK
+## PART 5 — SYSTEM UPDATE CHECK
 
 The Maieutic system itself gets updated (new skill versions change how notes are
 structured — e.g. 14.2 introduced score-banded evaluation callouts and the
@@ -501,19 +481,19 @@ their **already-created notes** still use the old structure. This part finds the
 gap and offers to migrate existing notes to the current format. Like spring
 cleaning, **nothing is changed without per-item confirmation.**
 
-### Step 6a — Did anything change?
+### Step 5a — Did anything change?
 Ask: "Have you updated the system since the last monthly meeting — pulled new
 skill files, bumped the version, or changed any templates?" Then establish the
 two versions:
-- **Current version** = the version in `CLAUDE.md`'s title (e.g. `15.0`).
+- **Current version** = the version in `CLAUDE.md`'s title (e.g. `15.1`).
 - **Last-reviewed version** = the `system-version:` recorded in the *previous*
   monthly-review note. If there is none (first time, or never recorded), ask the
   user what version their existing notes were built under.
 
 If the two match and the user reports no changes → record the current version in
-this meeting's note (Step 6d) and skip the rest.
+this meeting's note (Step 5d) and skip the rest.
 
-### Step 6b — Find what changed (the changelog is the source of truth)
+### Step 5b — Find what changed (the changelog is the source of truth)
 Read `CHANGELOG.md` at the vault root and collect every entry **between** the
 last-reviewed version and the current version. Each changelog entry flags items
 as **[migration]** when they affect already-created notes (callout formats,
@@ -530,7 +510,7 @@ older skill files themselves
 if a direct before/after comparison is needed. If WebFetch is unavailable in the
 current agent, fall back to asking the user to paste the changelog entries.
 
-### Step 6c — Migrate existing notes (per-item, confirmed)
+### Step 5c — Migrate existing notes (per-item, confirmed)
 For each **[migration]** item, identify the already-created notes it affects and
 walk them with the user, exactly like spring cleaning — show the old form, show
 the new form, apply on confirmation. Examples:
@@ -545,9 +525,9 @@ the new form, apply on confirmation. Examples:
 Batch obvious mechanical conversions (extraneous-friction, Principle 8) but still
 confirm the batch before applying. Skip notes the change doesn't touch.
 
-### Step 6d — Record the version
+### Step 5d — Record the version
 Write `system-version: [current]` into this meeting's monthly-review note (Stats
-block) so next month's Step 6a knows the baseline. Log migrated notes in the
+block) so next month's Step 5a knows the baseline. Log migrated notes in the
 Spring Cleaning Log.
 
 ---
@@ -564,9 +544,6 @@ applicable this month?" The user must choose one before proceeding.
 □ System update check — versions compared, [migration] items applied or deferred,
   and `system-version` recorded in this note?
 
-□ Back-link descriptions — all pending "description pending monthly meeting"
-  placeholders in 02 - Notes/ addressed? (written, deferred, or N/A)
-
 □ Stale notes (Category 0) — a decision made for each note flagged as stale?
   (relearn session scheduled, deferred to next month, or archived)
 
@@ -577,8 +554,11 @@ applicable this month?" The user must choose one before proceeding.
 
 □ Overdue reviews — all overdue notes surfaced and given a status?
 
-□ Review integrity audit (Part 4B) — reconciliation run both directions;
+□ Review integrity audit (Part 3B) — reconciliation run both directions;
   findings resolved or recorded in the monthly note?
+
+□ Open leads (Category 5) — surfaced, and any "pursue" answers queued?
+  (Nothing to delete — leads are never dropped.)
 
 □ Schema map updates — at least one walk-through per active domain completed?
   (or explicitly deferred if no new notes exist in that domain)
@@ -594,46 +574,7 @@ scheduled.md backup entry.
 
 ## CLOSING THE MEETING
 
-After all parts:## END-OF-MEETING AUDIT CHECKLIST
-
-Before declaring the meeting closed, run this checklist. Every item must have
-a status — the meeting does not close with open items.
-
-For any item marked incomplete, Claude prompts: "We didn't get to [item]. Want
-to handle it now, explicitly defer it to next month, or mark it as not
-applicable this month?" The user must choose one before proceeding.
-
-□ Back-link descriptions — all pending "description pending monthly meeting"
-  placeholders in 02 - Notes/ addressed? (written, deferred, or N/A)
-
-□ Stale notes (Category 0) — a decision made for each note flagged as stale?
-  (relearn session scheduled, deferred to next month, or archived)
-
-□ Scratch folder — all items in .note-information/Scratch/ reviewed?
-
-□ Inbox age — all inbox items older than 30 days handled?
-  (keep, schedule, resources, or delete)
-
-□ Overdue reviews — all overdue notes surfaced and given a status?
-
-□ Review integrity audit (Part 4B) — reconciliation run both directions;
-  findings resolved or recorded in the monthly note?
-
-□ Schema map updates — at least one walk-through per active domain completed?
-  (or explicitly deferred if no new notes exist in that domain)
-
-□ Cross-domain brainstorming — done or explicitly deferred?
-
-□ Profile review and calibration summary — completed?
-
-Once all items have a status, proceed to the monthly-review note and the
-scheduled.md backup entry.
-
----
-
-## CLOSING THE MEETING
-
-After all three parts:
+After all parts:
 
 1. Finalize the monthly-review note. Fill in any remaining fields. Ask:
    "Is there anything you want to add to this month's record before I close it?"

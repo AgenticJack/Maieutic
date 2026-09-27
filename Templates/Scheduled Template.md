@@ -11,5 +11,9 @@ Last updated: [DATE]
 - [Item description] — scheduled by [AI/User] on [date]
 ```
 
-Scope: monthly-meeting prompts, user-requested manual reviews, deferred back-link
-descriptions, anything scheduled for a specific future date. Mark `— done` or remove when complete.
+Scope: monthly-meeting prompts, user-requested manual reviews, deferred
+re-consolidations, anything scheduled for a specific future date. Mark `— done` or
+remove when complete.
+
+**Not in scope: back-link descriptions.** As of 15.1 they are never scheduled by
+date — each is written at the end of its note's next review session.

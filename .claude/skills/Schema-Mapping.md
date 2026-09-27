@@ -1,6 +1,6 @@
 # Schema Mapping Skill
 
-\---
+---
 
 ## PURPOSE AND CUSTOMIZATION
 
@@ -18,7 +18,7 @@ system is defined here.
 If this file is absent, Claude has no schema mapping system and will not
 attempt to discuss or build schema maps using any particular notation.
 
-\---
+---
 
 ## WHAT SCHEMA MAPPING IS
 
@@ -36,7 +36,7 @@ and labeled relationships, and updated iteratively as understanding develops.
 Cross-links between clusters — connections that cross domain or cluster
 boundaries — are the highest cognitively valuable elements of any map.
 
-\---
+---
 
 ## THREE-LEVEL TAXONOMY
 
@@ -62,7 +62,7 @@ Key principle: the arrow encodes the relationship. There are no unlabeled
 arrows — every arrow makes a claim by its type. A text label adds precision;
 it does not make the proposition valid where it would otherwise be incomplete.
 
-\---
+---
 
 ## FOCUS QUESTION
 
@@ -82,7 +82,7 @@ question for this map?" before any structure is proposed. This can be helpful,
 
 but is not strictly required.
 
-\---
+---
 
 ## NODE TYPES
 
@@ -104,7 +104,7 @@ The shape reflects the concept's character: parallelograms are slanted —
 things in motion. Trapezoids narrow upward — abstraction sits above instances.
 Diamonds can fall either way.
 
-\---
+---
 
 ## GROUPING
 
@@ -114,7 +114,7 @@ the same group or domain cluster. Boundaries can nest for subcategories.
 An arrow can connect to the boundary itself rather than individual nodes
 inside it when the connection applies to the entire group.
 
-\---
+---
 
 ## ARROW SYSTEM
 
@@ -124,7 +124,7 @@ Line: solid line ending in a circle terminator. The marking inside or on
 the terminator encodes the specific arrow type. All structural arrows read
 as "(is) \_\_\_ of" — always directed from more specific to more general.
 
-\---
+---
 
 Arrow type: Subset — smaller circle drawn inside the terminator circle
 
@@ -138,7 +138,7 @@ Sub-relationships (write on arrow when the specific distinction matters):
 * is a part of
 * is a component of
 
-\---
+---
 
 Arrow type: Instance — dot drawn inside the terminator circle
 
@@ -151,7 +151,7 @@ Sub-relationships:
 * is a specific case of
 * is a member of
 
-\---
+---
 
 Arrow type: Property — dot drawn on the edge/rim of the terminator circle
 
@@ -165,13 +165,13 @@ Sub-relationships:
 * is a feature of
 * describes
 
-\---
+---
 
 ### Category 2: Causal
 
 Line: solid line. Head type and markers distinguish arrow types.
 
-\---
+---
 
 Arrow type: Causes — open chevron head ——>
 
@@ -188,7 +188,7 @@ Sub-relationships:
 * is used for
 * results in
 
-\---
+---
 
 Arrow type: Inhibits — flat head ——⊣
 
@@ -204,7 +204,7 @@ Sub-relationships:
 * blocks
 * reduces
 
-\---
+---
 
 Arrow type: Requires — closed chevron ——►
 
@@ -218,7 +218,7 @@ Sub-relationships:
 * cannot function without
 * is a prerequisite of (non-temporal — for temporal dependency, use Requires Before)
 
-\---
+---
 
 ### Category 3: Quantitative
 
@@ -226,7 +226,7 @@ Line: solid line with + or − modifier. Placement encodes symmetry:
 modifier at arrowhead = asymmetric (effect lands at destination node);
 modifier centered above line = symmetric (property of the relationship).
 
-\---
+---
 
 Arrow type: Increases — open chevron with + at arrowhead →+
 
@@ -240,7 +240,7 @@ Sub-relationships:
 * produces more of
 * upregulates
 
-\---
+---
 
 Arrow type: Decreases — open chevron with − at arrowhead →−
 
@@ -255,7 +255,7 @@ Sub-relationships:
 * consumes
 * depletes
 
-\---
+---
 
 Arrow type: Proportional — bidirectional with + centered above ↔+
 
@@ -268,7 +268,7 @@ Sub-relationships:
 * positively correlates with
 * co-varies with (same direction)
 
-\---
+---
 
 Arrow type: Inversely Proportional — bidirectional with − centered above ↔−
 
@@ -282,14 +282,14 @@ Sub-relationships:
 * trades off with
 * co-varies with (opposite direction)
 
-\---
+---
 
 ### Category 4: Temporal / Sequential
 
 Line: solid line with open or closed chevron head. The vertical bar is the
 temporal marker. Open chevron = pure direction; closed chevron = dependency weight.
 
-\---
+---
 
 Arrow type: Before — open chevron + vertical bar ——|>
 
@@ -302,7 +302,7 @@ Sub-relationships:
 * leads to (in time)
 * happens prior to
 
-\---
+---
 
 Arrow type: Requires Before — closed chevron + vertical bar ——|►
 
@@ -315,7 +315,7 @@ Sub-relationships:
 * cannot begin without (temporal dependency)
 * gates (A must occur before B can begin)
 
-\---
+---
 
 Arrow type: Concurrent — bidirectional open chevron + bars on both sides ◄|——|>
 
@@ -328,7 +328,7 @@ Sub-relationships:
 * co-occurs with
 * is synchronous with
 
-\---
+---
 
 ### Category 5: Logical / Epistemic
 
@@ -336,7 +336,7 @@ Line: dashed line. Head type mirrors the causal pair — open chevron for
 positive epistemic direction, flat head for negative. Double lines (no
 arrowhead) for equivalence.
 
-\---
+---
 
 Arrow type: Supports — dashed open chevron ——->
 
@@ -352,7 +352,7 @@ Sub-relationships:
 * is consistent with
 * predicts
 
-\---
+---
 
 Arrow type: Contradicts — dashed flat head ——-⊣
 
@@ -367,7 +367,7 @@ Sub-relationships:
 * challenges
 * is in tension with
 
-\---
+---
 
 Arrow type: Equals — double line, no arrowhead =
 
@@ -383,7 +383,7 @@ Sub-relationships:
 * is the same as
 * is another name for
 
-\---
+---
 
 Arrow type: Analogous — double-lined bidirectional ⟺
 
@@ -398,7 +398,7 @@ Sub-relationships:
 * mirrors
 * parallels
 
-\---
+---
 
 ## NEGATION
 
@@ -420,7 +420,7 @@ Important distinction: negation is not the same as the opposing arrow type.
 Use negation when the relationship is simply absent, not when the opposing
 relationship is actively present.
 
-\---
+---
 
 ## PROPOSITION STANDARD
 
@@ -449,7 +449,7 @@ map needs to capture.
 The precision of a sub-relationship label, when used, is a direct measure
 of depth of understanding of that specific relationship.
 
-\---
+---
 
 ## CROSS-LINKS
 
@@ -468,7 +468,7 @@ Cross-links between domain schema maps feed into the Cross-Domain Map in
 03 - Schemas/. These are documented when the Analogy Gate completes after
 Review 3.
 
-\---
+---
 
 ## NODE TYPING WORKFLOW
 
@@ -497,7 +497,7 @@ Nominalization check: English allows processes and states to be expressed
 as nouns, making them appear as entities. During the audit ask: "Is this
 node actually a thing, or is it a process or state dressed as a noun?"
 
-\---
+---
 
 ## SCHEMA MAPS IN THE VAULT
 
@@ -569,7 +569,7 @@ Cross-Domain Map (one for the vault): structural isomorphisms across domain
 schema maps. Pattern families as nodes. Domain instances as connected nodes.
 Built collaboratively during monthly meetings from Analogy Gate results.
 
-\---
+---
 
 ## HOW CLAUDE USES THIS SYSTEM
 
@@ -620,7 +620,7 @@ full relationship notation — typed node shapes and labeled edges from this fil
 For the mind-map (`mindmap`) block: plain hierarchy only. The concept map is no
 longer a stripped-down overview; it carries the real propositions in the vault.
 
-\---
+---
 
 ## SHORTHAND REFERENCE
 

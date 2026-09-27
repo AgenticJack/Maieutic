@@ -64,9 +64,10 @@ live interaction, or generation the user is meant to own:
 ## ALWAYS SAFE TO DELEGATE (when a subagent tool is available)
 
 - **Monthly-meeting scans** — the spring-cleaning inventory, the review-integrity
-  audit (fan out over `02 - Notes/` in batches), the back-link "description
-  pending" sweep, and the schema-audit extraction (extraction only — the gap
-  judgment and the walk-through stay local).
+  audit (fan out over `02 - Notes/` in batches, including the sweep for stranded
+  `description pending` placeholders on notes with no future review), and the
+  schema-audit extraction (extraction only — the gap judgment and the
+  walk-through stay local).
 - **Migration edits** — bounded, repetitive edits across many notes (re-typing
   callouts, stripping stray tags, frontmatter fixes). One subagent per batch,
   with an exact before→after spec; the orchestrator spot-checks a sample after.

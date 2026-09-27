@@ -13,7 +13,7 @@ This repository is an **Obsidian vault** plus a set of **skill files**. Point an
 - It **teaches new concepts** by building a problem, voicing a historical thinker, and stopping at the cliffhanger so *you* attempt the leap (narrative-Socratic method).
 - It **refuses to let you fool yourself**: you retrieve before you reveal, you teach-back from memory, and it scores you against atomic facts using objective signals.
 - It **schedules spaced reviews** automatically (+1, +6, +14 days from completion) and tracks calibration (the gap between how much you *think* you know and how much you actually retrieve).
-- It helps you **connect ideas** into a knowledge graph and, once a month, runs a maintenance meeting (schema audits, back-link descriptions, spring cleaning).
+- It helps you **connect ideas** into a knowledge graph and, once a month, runs a maintenance meeting (schema audits, a review-integrity audit, spring cleaning).
 
 It is **not** a note-taking app or a chatbot. It's an accountability layer that makes the effortful parts of learning unavoidable.
 
@@ -34,9 +34,9 @@ The behavior is built on established learning science (full syntheses in `.claud
 |---|---|
 | **Learning Pipeline** | Prepare (narrative + pretest) → Attempt → Consolidate (Socratic through a character) → a natural stopping point → optional Note Creation (scope → teach-back → score → file). |
 | **Note Creation** | A standalone, user-triggered procedure: scope conversation, plain-language scoring, and a `Leads` section that points one step ahead. |
-| **Spaced Review** | Surfaces what's due, asks for a confidence estimate first, scores the teach-back, and reschedules. |
+| **Spaced Review** | Surfaces what's due, asks for a confidence estimate first, scores the teach-back, then re-consolidates the material Socratically before rescheduling. |
 | **Discussion Mode** | A peer-to-peer dynamic: the AI thinks out loud and holds real positions, shaped by the active intellectual **profile**. |
-| **Monthly Meeting** | Reflection → schema work → back-link descriptions (spaced retrieval for *connections*) → spring cleaning → profile review. |
+| **Monthly Meeting** | Reflection → schema work → spring cleaning → review-integrity audit → profile review → system update check. |
 
 ## Map
 
@@ -68,7 +68,7 @@ Templates/
 5. **(Optional) Add source libraries** to `resources/` in the format shown in `resources/Learning Science/`.
 6.  **(Optional) Optimal setup** I run the system in VS code with Claude Code chatting open on half my screen and Obsidian with my notes open on the other.
 
-A guided in-product walkthrough is available: keep `tutorial-mode15.0.md` in `.claude/skills/` (delete it to turn tutorial narration off).
+A guided in-product walkthrough is available: keep `tutorial-mode15.1.md` in `.claude/skills/` (delete it to turn tutorial narration off).
 
 ## Customization
 
